@@ -1,6 +1,8 @@
-import db from '../db/index';
+import db from '../db/index.js';
 import {compare, hash} from 'bcrypt'
 import jwt from 'jsonwebtoken';
+import {sendEmail} from '../utils/email.js'
+import crypto from 'crypto'
 
 
 export const register = async(req, res) =>{
@@ -9,17 +11,44 @@ export const register = async(req, res) =>{
 
     try {
         const hashedPassword = await hash(password, 10);
-        await db.query("insert into customers (fullname, email, password) values ($1, $2, $3)", [fullname, email, hashedPassword])
+        const token = crypto.randomBytes(32).toString('hex')
+        const {rows} = await db.query("insert into customers (fullname, email, password) values ($1, $2, $3) returning *", [fullname, email, hashedPassword])
+        await db.query("insert into verification_tokens (customerId, token) values ($1, $2)",[rows[0].id, token]);
 
+        const url = `${process.env.BASE_URL}/customer-auth/${rows[0].id}/verify/${token}`
+
+        await sendEmail(rows[0].email, "Verify Email", url)
         res.status(200).json({
             success: true,
-            message: 'Signup successful'
+            message: 'email sent to your account, please verify'
         })
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             message: "signup failed. Try again"
         })
+    }
+}
+
+export const verifyEmail = async(req, res) =>{
+    const {id, token} = req.params;
+    try {
+        const {rows} = await db.query('select * from customers where id=$1',[id]);
+
+        if(!rows[0]) return res.status(400).send({message: "Invalid link"});
+
+        const results = await db.query('select * from verification_tokens where customerId=$1',[rows[0].id])
+        if(!results.rows[0]) return res.status(400).send({message: "Invalid link"});
+
+        await db.query("UPDATE customers SET verified = true WHERE id = $1", [rows[0].id])
+        await db.query("DELETE FROM verification_tokens WHERE customerId=$1",[rows[0].id])
+
+        res.status(200).json({success:true,message: 'Email verified'})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({success:false, message: 'Email not verified'})
     }
 }
 
@@ -54,9 +83,17 @@ export const login = async(req, res) =>{
         res.cookie('accessToken', token, {
             httpOnly: true,
             expires: token.expiresIn
-        }).status(200).json({success:true, message:'logged in', data:{id,fullname,email,phonenumber,address}})
+        }).status(200).json({success:true, token, data:{id,fullname,email,phonenumber,address}})
     } catch (error) {
         console.log(error)
         res.status(500).json({success:false, message: 'Login failed'})
     }
 }
+
+export const logout =async (req, res) => {
+    // Clear the access token cookie
+    res.clearCookie('accessToken', { httpOnly: true });
+
+    // Respond with a success message
+    res.status(200).json({ success: true, message: 'Logged out successfully' });
+  };
