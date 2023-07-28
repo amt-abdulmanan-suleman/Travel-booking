@@ -1,9 +1,10 @@
 import React from "react";
+import Logo from "../../components/Logo/Logo";
 
 function Navbar() {
   return (
-    <nav className="bg-blueColor flex justify-between items-center px-6 shadow-md w-90 h-20">
-      Naaaaaaaaaaaav
+    <nav className="flex items-center justify-between w-auto h-[72px] px-[112px] bg-[#F1F1F1]">
+      <Logo />
     </nav>
   );
 }
