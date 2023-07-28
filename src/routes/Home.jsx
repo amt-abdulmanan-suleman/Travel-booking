@@ -1,7 +1,7 @@
 function HomePage() {
   return (
     <>
-      <div>Helloooooooooo</div>
+      <div>Heliiiiiiiiii</div>
     </>
   );
 }
