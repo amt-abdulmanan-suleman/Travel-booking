@@ -1,7 +1,9 @@
+import Navbar from "../components/Navbar/Navbar";
+
 function HomePage() {
   return (
     <>
-      <div className="bg-primary">Home sweet home</div>
+      <Navbar />
     </>
   );
 }
