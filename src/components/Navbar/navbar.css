@@ -1,0 +1,10 @@
+nav{
+ display: flex;
+min-width: 1440px;
+height: 72px;
+padding: 0px 112px;
+align-items: center;
+gap: 315px;
+flex-shrink: 0;
+background: #F1F1F1;
+}
