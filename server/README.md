@@ -108,4 +108,4 @@ The Travel Booking Server uses the following environment variables. Make sure to
 - `EMAIL_PWD` : The password_key for configuring nodemailer.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the ISC License.
