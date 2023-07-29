@@ -1,11 +1,13 @@
+import { Request, Response } from 'express';
 import db from '../db/index.js';
 import {compare, hash} from 'bcrypt'
-import jwt from 'jsonwebtoken';
-import {sendEmail} from '../utils/email.js'
+import jwt, { Secret } from 'jsonwebtoken';
+import {sendEmail} from '../utils/email'
 import crypto from 'crypto'
+import { SECRET } from '../config';
 
 
-export const register = async(req, res) =>{
+export const register = async(req:Request, res:Response) =>{
 
     const {fullname, email, password} = req.body;
 
@@ -31,7 +33,7 @@ export const register = async(req, res) =>{
     }
 }
 
-export const verifyEmail = async(req, res) =>{
+export const verifyEmail = async(req:Request, res:Response) =>{
     const {id, token} = req.params;
     try {
         const {rows} = await db.query('select * from customers where id=$1',[id]);
@@ -52,7 +54,7 @@ export const verifyEmail = async(req, res) =>{
     }
 }
 
-export const login = async(req, res) =>{
+export const login = async(req:Request, res:Response) =>{
     const {email, password} = req.body;
 
     try {
@@ -73,16 +75,18 @@ export const login = async(req, res) =>{
 
         const {id,fullname,phonenumber,address} = rows[0];
 
+        
         // create token
+        const expiresIn = 12 * 24 * 60 * 60 * 1000; 
         const token = jwt.sign(
             {id: id, fullname: fullname},
-            process.env.SECRET,
+            SECRET as Secret,
             {expiresIn: "12d"}
         )
         //set and send cookies to browser and client
         res.cookie('accessToken', token, {
             httpOnly: true,
-            expires: token.expiresIn
+            expires: new Date(Date.now() + expiresIn)
         }).status(200).json({success:true, token, data:{id,fullname,email,phonenumber,address}})
     } catch (error) {
         console.log(error)
@@ -90,7 +94,7 @@ export const login = async(req, res) =>{
     }
 }
 
-export const logout =async (req, res) => {
+export const logout =async (req:Request, res:Response) => {
     // Clear the access token cookie
     res.clearCookie('accessToken', { httpOnly: true });
 

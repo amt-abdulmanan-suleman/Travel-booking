@@ -1,5 +1,6 @@
 import pkg from 'pg'
 import dotenv from "dotenv";
+import { DB_PORT } from '../config';
 
 dotenv.config()
 
@@ -10,7 +11,7 @@ const pool = new Pool({
     host: process.env.HOST,
     database: process.env.DB_NAME,
     password: process.env.PASSWORD,
-    port: process.env.DB_PORT,
+    port: Number(DB_PORT),
 });
   
 pool.connect((err)=>{
@@ -19,5 +20,5 @@ pool.connect((err)=>{
 })
 
 export default {
-    query:(text,params)=>pool.query(text,params)
+    query:(text:string,params?:any[])=>pool.query(text,params)
 }

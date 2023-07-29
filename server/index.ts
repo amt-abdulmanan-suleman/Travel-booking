@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import customerRouter from './routes/customerRoutes.js'
+import customerRouter from './routes/customerRoutes'
 
 dotenv.config()
 const app = express();
