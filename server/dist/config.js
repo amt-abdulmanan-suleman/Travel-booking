@@ -9,8 +9,10 @@ dotenv_1.default.config();
 exports.PORT = process.env.PORT;
 exports.PASSWORD = process.env.PASSWORD;
 exports.SECRET = process.env.SECRET;
+
 exports.EMAIL_USER = process.env.EMAIL_USER;
 exports.EMAIL_PWD = process.env.EMAIL_PWD;
+
 exports.POSTGRES_URL = process.env.POSTGRES_URL;
 exports.CLOUD_NAME = process.env.CLOUD_NAME;
 exports.API_KEY = process.env.API_KEY;
