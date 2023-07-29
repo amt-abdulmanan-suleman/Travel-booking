@@ -5,7 +5,7 @@ Welcome to the Travel Booking Server! This server provides backend functionality
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Installation](#installation)
+- [Getting Started](#getting-started)
 - [Configuration](#configuration)
 - [Routes](#routes)
 - [Environment Variables](#environment-variables)
@@ -15,12 +15,16 @@ Welcome to the Travel Booking Server! This server provides backend functionality
 
 The Travel Booking Server is built to handle the backend requirements of a travel booking application. It provides endpoints for user authentication, managing bookings, searching for available accommodations, and more.
 
-## Installation
+## Getting Started
 
-To get started, follow these steps:
+To get started with the server, follow these steps:
 
-1. Install dependencies: `npm install`
-2. Run the server: `npm run serve`
+1. Clone the repository and navigate to the project directory.
+2. Install dependencies by running `npm install`.
+3. Create a `.env` file in the project root and set the environment variables listed above.
+4. Start the server by running `npm run serve`.
+
+The server will be available at `http://localhost:3000`.
 
 ## Configuration
 
@@ -102,3 +106,6 @@ The Travel Booking Server uses the following environment variables. Make sure to
 - `SECRET`: The secret key used for signing JSON Web Tokens (JWTs).
 - `EMAIL_USER`: The email used for configuring nodemailer.
 - `EMAIL_PWD` : The password_key for configuring nodemailer.
+
+## License
+This project is licensed under the MIT License.
