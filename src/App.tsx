@@ -8,6 +8,8 @@ import Accomodation from "./routes/Accomodation";
 import Hotels from "./routes/Hotels";
 import CarRentals from "./routes/CarRentals";
 import Flights from "./routes/Flights";
+import Dashboard from "./routes/Dashboard";
+import Cart from "./routes/Cart";
 
 function App(): JSX.Element {
   return (
@@ -21,6 +23,8 @@ function App(): JSX.Element {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/carrentals" element={<CarRentals />} />
         <Route path="/flights" element={<Flights />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Cart" element={<Cart />} />
       </Routes>
     </div>
   );
