@@ -87,3 +87,18 @@ background: #B75C76;
 color: #fff;
 margin-left: 20px;
 }
+
+@media screen and (max-width: 550px) {
+  .dropButton{
+    width: 80px;
+    height: 30px;
+  }
+
+  .dropButton span{
+    font-size: 10px;
+  }
+
+  .dropButton svg{
+    display: none;
+  }
+}

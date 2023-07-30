@@ -18,6 +18,12 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1; /* Ensure the dropdown appears above other elements */
   }
+
+  .dropdownBtn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   
   .navMenu li {
     padding: 8px 12px;

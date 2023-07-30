@@ -1,26 +1,10 @@
-nav{
- display: flex;
-width: auto;
-height: 72px;
-padding: 0px 112px;
-align-items: center;
-gap: 315px;
-flex-shrink: 0;
-background: #F1F1F1;
-}
 
-nav .listContainer{
+
+.listItemsBox{
     display: flex;
-padding-right: 0px;
 align-items: center;
-gap: 442px;
-
-}
-
-nav .listContainer .listItemsBox{
-    display: flex;
-align-items: flex-start;
-gap: 68px;
+justify-content: space-between;
+gap: 48px;
 
 }
 
@@ -55,23 +39,118 @@ gap: 68px;
     align-items: center;
 }
 
+.mediaNavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 112px;
+    height: 72px;
+    background: #F1F1F1;
+}
 
-@media screen and (max-width: 750px){
-    nav{
-        padding: 0 20px;
-        gap: 70px;
+.mediaNavbar-links {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 492px;
+    
+}
+
+.mediaNavbar-links_container {
+    display: flex;
+    flex-direction: row;
+    padding-right: 0px;
+    align-items: center;
+}
+
+.mediaNavbar-sign {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.mediaNavbar-menu {
+    margin-left: 1rem;
+
+    display: none;
+    position: relative;
+}
+
+.mediaNavbar-menu svg {
+    cursor: pointer;
+}
+
+.mediaNavbar-menu_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    text-align: center;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 80px;
+    margin-top: 1.6rem;
+    min-width: 210px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0,0, 0,0.2);
+}
+
+.mediaNavbar-menu_container p {
+    margin: 1rem 0;
+}
+
+.mediaNavbar-menu_container-links-sign {
+    display: none;
+}
+
+@media screen and (max-width: 1250px) {
+    .mediaNavbar-links{
+        gap: 112px;
     }
-    nav .listContainer{
-    gap:22px;    
+}
+
+@media screen and (max-width: 1050px) {
+    .mediaNavbar-links_container {
+        display: none;
     }
 
-    nav .listContainer .listItemsBox{
-    gap: 22px;    
+    .mediaNavbar-menu {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .mediaNavbar {
+        padding: 1rem 4rem;
+        background-color: white;
     }
 
-    .navitem{
-        color: var(--fontColor);
-        font-family: Inter;
-        font-size: 16px;
+    .listItemsBox{
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .mediaNavbar {
+        padding: 0.8rem;
+        height: 58px;
+    }
+
+    .mediaNavbar-sign .registration .login {
+        display: none;
+    }
+    
+
+    .mediaNavbar-menu_container {
+        top: 20px;
+        right: -250px;
+    }
+
+    .mediaNavbar-menu_container-linkssign{
+        display: flex;
     }
 }

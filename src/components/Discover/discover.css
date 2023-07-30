@@ -1,0 +1,46 @@
+.discoverTextArea span{
+    color: #3D3939;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.discoverTextArea p{
+    color: #3D3939;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.discoverTextArea{
+    margin: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+@media screen and (max-width: 550px) {
+    .discoverTextArea span{
+        color: #3D3939;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+    }
+
+    .discoverTextArea p{
+        color: #3D3939;
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+    }
+}
