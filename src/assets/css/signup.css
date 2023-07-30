@@ -1,0 +1,121 @@
+.signUp {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  font-family: Inter;
+  font-style: normal;
+  line-height: normal;
+}
+
+.mainForm {
+  margin-top: 47px;
+  margin-left: 220px;
+}
+
+h2 {
+  color: var(--primary-color-1, #464b93);
+  font-size: 40.407px;
+  font-weight: 700;
+  margin-bottom: 56px;
+  margin-top: 76px;
+}
+
+label {
+  color: var(--primary-color-1, #464b93);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+input {
+  display: inline-flex;
+  padding-left: 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #888686;
+  height: 40px;
+  width: 412px;
+  color: #3d3939;
+  font-size: 16px;
+  margin-bottom: 15px;
+  margin-top: 8px;
+}
+
+.terms {
+  color: #3d3939;
+  font-size: 12px;
+  width: 422px;
+}
+
+button {
+  border-radius: 8px;
+  color: #b75c76;
+  display: flex;
+  width: 423px;
+  height: 46px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin: 15px 0px;
+}
+button:hover {
+  background: #b75c76;
+  color: #ffffff;
+}
+
+.signup-options {
+  color: #b75c76;
+  text-align: center;
+  font-size: 16px;
+}
+.signup-options h6 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0px;
+}
+.signup-options p {
+  color: #3d3939;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.signup-options p span {
+  color: #b75c76;
+  font-size: 16px;
+  cursor: pointer;
+}
+.main-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+}
+
+@media screen and (max-width: 1470px) {
+  .mainForm {
+    margin: auto;
+  }
+  input {
+    width: 330px;
+    height: 40px;
+  }
+  button {
+    width: 343px;
+    height: 40px;
+  }
+  button:focus {
+    background: #b75c76;
+    color: #ffffff;
+  }
+  .terms {
+    width: 326px;
+  }
+
+  .main-img {
+    display: none;
+  }
+}
