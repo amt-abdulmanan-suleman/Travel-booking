@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { menuList, MenuItem } from "./buttonItems";
-import "./buttons.css"
+import "./buttons.scss"
 
 const DropButton: React.FC = () => {
   // State to track whether the dropdown is open or closed

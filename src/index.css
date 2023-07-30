@@ -1,16 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-body {
-  margin: 0;
-  font-family: "Inter", sans-serif;
-}
-
-:root{
+:root {
   --blueColor: "#000F60";
   --lightblueColor: "#6b70bd";
   --roseColor: "#b75c76";
@@ -18,4 +8,18 @@ body {
   --whiteColor: "#ffffff";
   --lightGrey: "#d9d9d9";
   --fontColor: "#3d3939";
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 100%;
 }

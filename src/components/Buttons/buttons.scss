@@ -51,15 +51,30 @@
 
 .basicBtn {
   display: flex;
+  justify-content: center;
+  column-gap: 8px;
   padding: 10px 16px;
-  align-items: flex-start;
-  gap: 10px;
   border-radius: 6px;
   outline: none;
   border: none;
-  background-color: #fff;
-  width: 80px;
-  height: 40px;
+  background-color: #b75c76;
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  &.block {
+    width: 100%;
+    border-radius: 8px;
+  }
+  &.outline {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #888686;
+    color: #B75C76;
+  }
 }
 
 .basicBtn .btnLink {

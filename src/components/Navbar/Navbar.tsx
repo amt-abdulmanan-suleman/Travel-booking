@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../Logo/Logo";
-import { Menu, XCircle } from 'react-feather';
+import { Menu, XCircle } from "react-feather";
 import "./navbar.css";
 import { menuList } from "./navList"; // Import menuList and MenuItem interface
 import Dropdown from "../Dropdown/Dropdown";
@@ -13,14 +13,18 @@ const Navbar: React.FC = () => {
     <nav>
       <div className="listContainer">
         <Logo />
-        <div className="listItemsBox">          
-              <Link className="navitem" to={menuList[1].url}>{menuList[1].title}</Link>                                       
-              <Dropdown/>            
-              <Link className="navitem" to={menuList[2].url}>{menuList[2].title}</Link>       
+        <div className="listItemsBox">
+          <Link className="navitem" to={menuList[1].url}>
+            {menuList[1].title}
+          </Link>
+          <Dropdown />
+          <Link className="navitem" to={menuList[2].url}>
+            {menuList[2].title}
+          </Link>
         </div>
       </div>
       <div className="registration">
-        <Button url={menuList[3].url} />
+        <Link to={menuList[3].url}>Log in</Link>
         <DropButton />
       </div>
     </nav>
@@ -28,6 +32,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-
 
 export {}; // Add an empty export to make TypeScript treat this file as a module
