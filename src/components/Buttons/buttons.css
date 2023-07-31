@@ -18,16 +18,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1; /* Ensure the dropdown appears above other elements */
   }
-
-  .dropdownBtn{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
   
   .navMenu li {
     padding: 8px 12px;
-    cursor: pointer;
   }
   
   .navMenu li:hover {
@@ -54,13 +47,58 @@
     line-height: normal;
     list-style: none;
     text-decoration: none;
-    cursor: pointer;
 }
-
-.dropdownArea svg{
-  cursor: pointer;
-}
-
-
-
   
+.basicBtn{
+  display: flex;
+padding: 10px 16px;
+align-items: flex-start;
+gap: 10px;
+border-radius: 6px;
+outline: none;
+border: none;
+background-color: #fff;
+width: 80px;
+height: 40px;
+
+}
+
+.basicBtn .btnLink{
+  text-decoration: none;
+  color: var(--fontColor);
+  font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.dropButton{
+  display: flex;
+width: 124px;
+height: 40px;
+padding: 3px 16px;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+border-radius: 6px;
+border: none;
+background: #B75C76;
+color: #fff;
+margin-left: 20px;
+}
+
+@media screen and (max-width: 550px) {
+  .dropButton{
+    width: 80px;
+    height: 30px;
+  }
+
+  .dropButton span{
+    font-size: 10px;
+  }
+
+  .dropButton svg{
+    display: none;
+  }
+}
