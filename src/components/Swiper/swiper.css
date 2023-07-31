@@ -20,6 +20,7 @@ gap: 8px;
     font-size: 18px;
     background: #fff;
     max-width: 18%;
+    box-sizing: border-box;
     margin: 0px 50px 0px 0px;
   }
   
