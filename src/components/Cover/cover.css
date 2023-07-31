@@ -5,4 +5,6 @@
     align-items: center;
     justify-content: center;
     border: 1px solid green;
+    margin: 0px auto 2.4rem auto;
+    height: 38rem;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import "./swiper.css";
 
-interface DiscoverCardProps {
+export interface DiscoverCardProps {
   imageUrl: string;
   cardText: string;
 }
