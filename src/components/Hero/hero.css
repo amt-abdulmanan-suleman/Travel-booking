@@ -1,7 +1,8 @@
 .homeHero{
     width: auto;
-    height: 604px;
+    height: 524px;
     flex-shrink: 0;
+    margin-bottom: 2rem;
 }
 
 /* .otherHeroes{
@@ -10,11 +11,10 @@
     position: relative;
 } */
 
-img{
+.homeHero img{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-position: center;
 }
 
 .heroText{

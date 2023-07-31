@@ -1,0 +1,10 @@
+.swiperContainer{
+display: flex;
+width: 80%;
+padding: 8px 0px;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 8px;
+border: 1px solid red;
+}

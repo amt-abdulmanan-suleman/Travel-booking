@@ -1,4 +1,4 @@
-.discoverTextArea span{
+.discoverTextArea h1{
     color: #3D3939;
 font-family: Inter;
 font-size: 24px;
@@ -14,9 +14,17 @@ font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+padding: 1rem;
 }
 
 .discoverTextArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.discover{
     display: flex;
     justify-content: center;
     align-items: center;
