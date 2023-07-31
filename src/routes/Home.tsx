@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Hero from "../components/Hero/Hero";
 import HeroBackground from "../assets/images/homepage/hero.png";
 import Discover from "../components/Discover/Discover";
+import Cover from "../components/Cover/Cover";
 
 const Home: React.FC = () => {
   // Your component logic here
@@ -21,6 +22,7 @@ const Home: React.FC = () => {
         ed vivamus dignissim et cras."
         />
     <Discover />
+    <Cover />
     </>
   )
 };

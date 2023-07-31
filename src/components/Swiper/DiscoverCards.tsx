@@ -1,19 +1,19 @@
 import React from "react";
-import "./discoverCards.css";
+import "./swiper.css";
 
 interface DiscoverCardProps {
   imageUrl: string;
   cardText: string;
 }
 
-const DiscoverCards: React.FC<DiscoverCardProps> = ({ imageUrl, cardText }) => {
+const DiscoverCards: React.FC<DiscoverCardProps> = (props) => {
   return (
     <div className="card-container">
       <div className="card-image">
-        <img src={imageUrl} alt="Card Background" />
+        <img src={props.imageUrl} alt="Card Background" />
       </div>
       <div className="card-content">
-        <h5>{cardText}</h5>
+        <h5>{props.cardText}</h5>
       </div>
     </div>
   );
