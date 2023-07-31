@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
+import facebook from "../assets/icons/facebook-icon.png"
+import google from "../assets/icons/google-logo.png"
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 
@@ -90,15 +92,17 @@ const CustomerSignup: React.FC = () => {
             </Button>
             <h6 className="or">OR</h6>
             <Button type="button" block outline>
-              
+              <img src={google} alt="google icon" />
               Google
             </Button>
             <Button type="button" block outline>
+            <img src={facebook} alt="google icon" />
+
               Facebook
             </Button>
-            <p>
-              Have an account? <span>Login</span>
-            </p>
+            <div className="login">
+              Have an account? <Link to="/Login">Login</Link>
+            </div>
           </form>
         </div>
       </div>

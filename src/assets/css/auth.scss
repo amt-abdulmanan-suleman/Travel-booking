@@ -65,6 +65,34 @@
       font-weight: 600;
       line-height: normal;
     }
+    .login {
+      color: #3d3939;
+      text-align: center;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      a {
+        color: #b75c76;
+        font-family: Inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    .forgot-password {
+      color: #b75c76;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin: 0;
+    }
   }
   .image-wrapper {
     width: 50%;
