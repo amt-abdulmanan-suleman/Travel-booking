@@ -18,6 +18,9 @@ border: 1px solid red;
     text-align: center;
     font-size: 18px;
     background: #fff;
+    width: 18%;
+    margin: 0px 16px;
+    border: 1px solid blue;
   
     /* Center slide text vertically */
     display: flex;
@@ -27,7 +30,7 @@ border: 1px solid red;
   
   .swiper-slide img {
     display: block;
-    width: 100%;
+    width: 255px;
     height: 100%;
     object-fit: cover;
   }

@@ -1,10 +1,21 @@
 import React from "react";
-// import "./discoverCards.css"
+import "./discoverCards.css";
 
-const DiscoverCards: React.FC = () => {
-  // Your component logic here
+interface DiscoverCardProps {
+  imageUrl: string;
+  cardText: string;
+}
+
+const DiscoverCards: React.FC<DiscoverCardProps> = ({ imageUrl, cardText }) => {
   return (
-    <><div className="swiperContainer">Swiiiiiiiiiii</div></>    
+    <div className="card-container">
+      <div className="card-image">
+        <img src={imageUrl} alt="Card Background" />
+      </div>
+      <div className="card-content">
+        <h5>{cardText}</h5>
+      </div>
+    </div>
   );
 };
 

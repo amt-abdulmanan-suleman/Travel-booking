@@ -1,0 +1,29 @@
+/* Replace "image-url.jpg" with the actual URL of your background image */
+.card-container {
+    width: 255px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-image img {
+    width: 255px;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    position: absolute; /* Position the content absolutely within the container */
+    bottom: 0; /* Align the content to the bottom */
+    left: 0;
+    right: 0;
+    padding: 16px;
+  }
+  
+  .card-content h5 {
+    text-align: start;
+    margin: 0;
+    font-size: 18px;
+    color: #fff; /* Set the text color to white */
+  }
+  
