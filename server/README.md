@@ -49,7 +49,7 @@ Request body:
   "email": "your_email@example.com",
   "password": "your_password"
 }
-
+```
 Response body:
 
 ```json
@@ -57,7 +57,7 @@ Response body:
   "success": true,
   "message": "email sent to your account, please verify"
 }
-
+```
 ### POST `/customer-auth/login`
 
 Log in an existing user.
@@ -69,7 +69,7 @@ Request body:
   "email": "your_email@example.com",
   "password": "your_password"
 }
-
+```
 Response body:
 
 ```json
@@ -84,7 +84,7 @@ Response body:
     "address": "your_address"
   }
 }
-
+```
 ### GET `/customer-auth/:id/verify/:token`
 
 Verify Email.
@@ -96,7 +96,7 @@ Response body:
   "success": true,
    "message": "Email verified"
 }
-
+```
 
 ## Environment Variables
 
