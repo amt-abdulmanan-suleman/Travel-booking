@@ -17,8 +17,8 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/customersignup" element={<CustomerSignup />} />
-        <Route path="/businesssignup" element={<BusinessSignup />} />
+        <Route path="/customer-signup" element={<CustomerSignup />} />
+        <Route path="/business-signup" element={<BusinessSignup />} />
         <Route path="/accomodation" element={<Accomodation />} />
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/carrentals" element={<CarRentals />} />

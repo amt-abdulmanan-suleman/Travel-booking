@@ -1,5 +1,5 @@
 import Logo from "../Logo/Logo";
-import { Menu, XCircle } from 'react-feather';
+import { Menu, XCircle } from "react-feather";
 import "./navbar.css";
 import { menuList } from "./navList"; // Import menuList and MenuItem interface
 import Dropdown from "../Dropdown/Dropdown";
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
       </div>
       <div className="mediaNavbar-sign">
       <div className="registration">
-        <span className="login"><Button url={menuList[3].url} /></span>
+        <span className="login"><Button url={menuList[3].url} >Log in</Button></span>
         <DropButton />
       </div>
       </div>
