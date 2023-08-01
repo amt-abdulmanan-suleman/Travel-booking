@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
-import facebook from "../assets/icons/facebook-icon.png"
-import google from "../assets/icons/google-logo.png"
+import visibility from "../assets/icons/visibility-icon-13.jpg";
+import visibilityOff from "../assets/icons/visibility_off.svg";
+import facebook from "../assets/icons/facebook-icon.png";
+import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 
@@ -14,6 +16,8 @@ interface FormData {
 }
 
 const CustomerSignup: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -32,6 +36,10 @@ const CustomerSignup: React.FC = () => {
     e.preventDefault();
     // Handle form submission here,
     console.log(formData);
+  };
+
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -73,15 +81,33 @@ const CustomerSignup: React.FC = () => {
               <label htmlFor="password" className="label">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Type password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
+              <div className="form__input__box">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  placeholder="Type password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="form__input__box__password"
+                />
+                {showPassword ? (
+                  <img
+                    src={visibility}
+                    alt="show password"
+                    onClick={handleTogglePassword}
+                    className="toggle-icon"
+                  />
+                ) : (
+                  <img
+                    src={visibilityOff}
+                    alt="hide password"
+                    onClick={handleTogglePassword}
+                    className="toggle-icon"
+                  />
+                )}
+              </div>
             </div>
             <p className="terms">
               By signing up, you agree to campsite’s Terms of Service and
@@ -96,8 +122,7 @@ const CustomerSignup: React.FC = () => {
               Google
             </Button>
             <Button type="button" block outline>
-            <img src={facebook} alt="google icon" />
-
+              <img src={facebook} alt="google icon" />
               Facebook
             </Button>
             <div className="login">

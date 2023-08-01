@@ -1,23 +1,11 @@
-// // Login.tsx
-// import React from "react";
-
-// const Login: React.FC = () => {
-//   // Your component logic here
-//   return (
-//     <div>I am Login</div>
-//   )
-// };
-
-// export default Login;
-
-// export {}; 
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
-import facebook from "../assets/icons/facebook-icon.png"
-import google from "../assets/icons/google-logo.png"
+import visibility from "../assets/icons/visibility-icon-13.jpg";
+import visibilityOff from "../assets/icons/visibility_off.svg";
+import facebook from "../assets/icons/facebook-icon.png";
+import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 
@@ -28,6 +16,8 @@ interface FormData {
 }
 
 const Login: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -48,6 +38,9 @@ const Login: React.FC = () => {
     console.log(formData);
   };
 
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   return (
     <div className="wrapper">
       <div className="form">
@@ -73,15 +66,33 @@ const Login: React.FC = () => {
               <label htmlFor="password" className="label">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Type password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
+              <div className="form__input__box">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  placeholder="Type password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="form__input__box__password"
+                  required
+                />
+                {showPassword ? (
+                  <img
+                    src={visibility}
+                    alt="show password"
+                    onClick={handleTogglePassword}
+                    className="toggle-icon"
+                  />
+                ) : (
+                  <img
+                    src={visibilityOff}
+                    alt="hide password"
+                    onClick={handleTogglePassword}
+                    className="toggle-icon"
+                  />
+                )}
+              </div>
             </div>
             <p className="forgot-password">Forgot your password?</p>
             <p className="terms">
@@ -89,7 +100,7 @@ const Login: React.FC = () => {
               Privacy policy
             </p>
             <Button type="submit" block>
-            Log in
+              Log in
             </Button>
             <h6 className="or">OR</h6>
             <Button type="button" block outline>
@@ -97,12 +108,11 @@ const Login: React.FC = () => {
               Google
             </Button>
             <Button type="button" block outline>
-            <img src={facebook} alt="google icon" />
-
+              <img src={facebook} alt="google icon" />
               Facebook
             </Button>
             <div className="login">
-              Have an account? <Link to="/customer-signup">Sign up</Link>
+              Don't have an account? <Link to="/customer-signup">Sign up</Link>
             </div>
           </form>
         </div>

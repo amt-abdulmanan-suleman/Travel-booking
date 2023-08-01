@@ -17,8 +17,8 @@
       color: var(--primary-color-1, #464b93);
       font-size: 40.407px;
       font-weight: 700;
-      margin-bottom: 56px;
-      margin-top: 76px;
+      margin-bottom: 30px;
+      margin-top: 64px;
       font-family: Inter;
     }
     form {
@@ -40,6 +40,34 @@
         line-height: 19.36px;
         font-weight: 400;
         font-family: Inter;
+      }
+      &__box {
+        border-radius: 6px;
+        border: 1px solid #888686;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 10px;
+        margin-top: 8px;
+
+        .form__input__box__password {
+          margin-top: 0;
+          padding: 10px 15px;
+          border-radius: 6px;
+          border: 0;
+          outline: 0;
+          color: #3d3939;
+          font-size: 16px;
+          line-height: 19.36px;
+          font-weight: 400;
+          font-family: Inter;
+          text-decoration: none;
+        }
+      }
+      .toggle-icon {
+        max-width: 16px;
+        max-height: 16px;
+        cursor: pointer;
       }
 
       .label {
@@ -113,6 +141,13 @@
   .wrapper {
     .form {
       width: 100%;
+      &__title{
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .label{
+        font-weight: 600;
+      }
     }
     .image-wrapper {
       display: none;
