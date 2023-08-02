@@ -1,44 +1,89 @@
-import { Request, Response } from 'express';
-
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import jwt, { Secret } from 'jsonwebtoken';
+import { createRefreshToken } from '../utils/auth'; // Assuming you have implemented the createRefreshToken function
 
 interface User {
-    id: string;
+  id: string;
 }
 
 declare global {
-    namespace Express {
-        interface Request {
-            user?: User;
-        }
+  namespace Express {
+    interface Request {
+      user?: User;
     }
+  }
 }
 
-export const verifyToken = (req: Request, res: Response, next: () => void): void => {
-    const { accessToken } = req.cookies;
+export const verifyToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const { accessToken } = req.cookies;
+  const { refreshToken } = req.cookies;
 
-    if (!accessToken) {
-        res.status(401).json({ success: false, message: 'Unauthorized' });
-        return;
+  if (!accessToken && !refreshToken) {
+    res.status(401).json({ success: false, message: 'Unauthorized' });
+    return;
+  }
+
+  // Function to issue a new access token using the refresh token
+  const issueNewAccessToken = async () => {
+    try {
+      const decoded = jwt.verify(refreshToken, process.env.SECRET as Secret);
+      const { userId } = decoded as { userId: string };
+
+      // Here, you should implement a function to validate the refresh token and ensure it is still valid.
+      // For example, check if it exists in a database and hasn't expired.
+
+      // Create a new access token
+      const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
+      const newAccessToken = jwt.sign({ id: userId }, process.env.SECRET as Secret, { expiresIn: accessExpiresIn });
+
+      // Set and send the new access token in the response
+      res.cookie('accessToken', newAccessToken, {
+        httpOnly: true,
+        expires: new Date(Date.now() + accessExpiresIn * 1000),
+      });
+
+      // Assign the user to the request object for other middlewares/routes to use
+      req.user = { id: userId };
+
+      return true;
+    } catch (error) {
+      // The refresh token is either invalid or expired
+      return false;
     }
+  };
 
-    jwt.verify(accessToken, process.env.SECRET as string, (err:any, user:any) => {
-        if (err) {
-            res.status(401).json({ success: false, message: 'Unauthorized' });
-            return;
-        }else{
-            req.user = user as User;
-            next();
+  if (accessToken) {
+    // Verify the access token
+    jwt.verify(accessToken, process.env.SECRET as Secret, async (err: any, user: any) => {
+      if (err) {
+        // If the access token is invalid or expired, try using the refresh token to get a new access token
+        const refreshed = await issueNewAccessToken();
+        if (!refreshed) {
+          res.status(401).json({ success: false, message: 'Unauthorized' });
+          return;
         }
+        next();
+      } else {
+        // Access token is valid, assign the user to the request object and proceed
+        req.user = user as User;
+        next();
+      }
     });
+  } else if (refreshToken) {
+    // Use the refresh token to issue a new access token
+    const refreshed = await issueNewAccessToken();
+    if (!refreshed) {
+      res.status(401).json({ success: false, message: 'Unauthorized' });
+      return;
+    }
+    next();
+  }
 };
 
-
-export const verifyUser = (req:Request, res: Response, next: () => void): void => {
-    verifyToken(req, res, next); 
-    if (req.user?.id === req.params.id) {
-        next();
-    } else {
-        res.status(401).json({ success: false, message: 'Not authenticated' });
-    }
+export const verifyUser = (req: Request, res: Response, next: NextFunction): void => {
+  if (req.user?.id === req.params.id) {
+    next();
+  } else {
+    res.status(401).json({ success: false, message: 'Not authenticated' });
+  }
 };

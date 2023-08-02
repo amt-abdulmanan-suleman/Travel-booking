@@ -5,6 +5,7 @@ import jwt, { Secret } from 'jsonwebtoken';
 import {sendEmail} from '../utils/email'
 import crypto from 'crypto'
 import { SECRET } from '../config';
+import { createRefreshToken } from '../utils/auth';
 
 
 export const register = async(req:Request, res:Response) =>{
@@ -53,46 +54,64 @@ export const verifyEmail = async(req:Request, res:Response) =>{
         res.status(500).json({success:false, message: 'Email not verified'})
     }
 }
+ // You'll need to create this function
 
-export const login = async(req:Request, res:Response) =>{
-    const {email, password} = req.body;
+export const login = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
 
-    try {
-        const {rows} = await db.query('select * from customers where email=$1',[email]);
+  try {
+    const { rows } = await db.query('select * from customers where email=$1', [email]);
 
-        if(!rows[0]){
-            return res.status(404).json({
-                success: false,
-                message: "user doesn't exist"
-            })
-        }
-        // check if password is correct
-        const isCorrectPassword = await compare(password, rows[0].password);
-
-        if(!isCorrectPassword){
-            return res.status(401).json({success:false, message: "Wrong password"})
-        }
-
-        const {id,fullname,phonenumber,address} = rows[0];
-
-        
-        // create token
-        const expiresIn = 12 * 24 * 60 * 60 * 1000; 
-        const token = jwt.sign(
-            {id: id, fullname: fullname},
-            SECRET as Secret,
-            {expiresIn: "12d"}
-        )
-        //set and send cookies to browser and client
-        res.cookie('accessToken', token, {
-            httpOnly: true,
-            expires: new Date(Date.now() + expiresIn)
-        }).status(200).json({success:true, token, data:{id,fullname,email,phonenumber,address}})
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({success:false, message: 'Login failed'})
+    if (!rows[0]) {
+      return res.status(404).json({
+        success: false,
+        message: "User doesn't exist",
+      });
     }
-}
+
+    // check if password is correct
+    const isCorrectPassword = await compare(password, rows[0].password);
+
+    if (!isCorrectPassword) {
+      return res.status(401).json({ success: false, message: "Wrong password" });
+    }
+
+    const { id, fullname, phonenumber, address } = rows[0];
+
+    // Create access token
+    const accessExpiresIn = 5; // 12 hours in seconds
+    const accessToken = jwt.sign(
+      { id: id, fullname: fullname },
+      SECRET as Secret,
+      { expiresIn: accessExpiresIn }
+    );
+
+    // Create refresh token
+    const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+
+    // Set and send cookies to browser and client
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + accessExpiresIn * 1000),
+    });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
+    });
+
+    res.status(200).json({
+      success: true,
+      accessToken,
+      refreshToken,
+      data: { id, fullname, email, phonenumber, address },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Login failed' });
+  }
+};
+
 
 export const logout =async (req:Request, res:Response) => {
     // Clear the access token cookie
