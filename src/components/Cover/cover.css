@@ -13,7 +13,7 @@
 }
 
 .covercontent{
-height: 591px;
+max-height: auto;
 width: 100%;
 flex-shrink: 0;
 display: flex;
@@ -30,7 +30,7 @@ align-items: center;
     display: flex;
     width: 401px;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: flex-start;
     margin: auto;
     gap: 1rem;
@@ -75,7 +75,7 @@ line-height: normal;
 }
 
 .coverbutton{
-    text-align: start;
+    text-align: flex-start;
 }
 
 .coverdata{
@@ -100,3 +100,42 @@ line-height: normal;
     margin-left: auto;
   }
   
+  @media screen and (max-width: 1190px){
+     .coverframe{
+        max-width: auto;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        margin: 1px 5vw 2rem 5vw;
+     }
+
+     .imgBox, .coverText{
+        width: 45%;
+    }
+
+    .coverdata{
+        max-width: 280px;
+    }
+     
+  }
+
+  @media screen and (max-width: 850px){
+    .covercontent{
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .imgBox, .coverText{
+        width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 550px){
+    .coverframe{
+     width: 90%;
+     
+    }
+
+    .covercontent{
+        height: auto;
+    }
+  }

@@ -5,6 +5,7 @@ import Hero from "../components/Hero/Hero";
 import HeroBackground from "../assets/images/homepage/hero.png";
 import Discover from "../components/Discover/Discover";
 import Cover from "../components/Cover/Cover";
+import TravelSwiper from "../components/Travel Swiper/TravelSwiper";
 
 const Home: React.FC = () => {
   // Your component logic here
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
         />
     <Discover />
     <Cover />
+    <TravelSwiper />
     </>
   )
 };
