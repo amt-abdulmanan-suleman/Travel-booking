@@ -9,6 +9,9 @@ const Cover: React.FC = () => {
     <div className='coverframe'>
      <div className='covercontent'>
      <img src={coverimage} alt="cover img" />
+     <div className='coverText'>
+      
+     </div>
      </div>
     </div>
     </>
