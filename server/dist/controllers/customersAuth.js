@@ -27,7 +27,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = crypto_1.default.randomBytes(32).toString('hex');
         const { rows } = yield index_js_1.default.query("insert into customers (fullname, email, password) values ($1, $2, $3) returning *", [fullname, email, hashedPassword]);
         yield index_js_1.default.query("insert into verification_tokens (customerId, token) values ($1, $2)", [rows[0].id, token]);
-        const url = `${process.env.BASE_URL}/customer-auth/${rows[0].id}/verify/${token}`;
+        const url = `https://travel-booking-tau.vercel.app/customer-auth/${rows[0].id}/verify/${token}`;
         yield (0, email_1.sendEmail)(rows[0].email, "Verify Email", url);
         res.status(200).json({
             success: true,
@@ -54,7 +54,7 @@ const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return res.status(400).send({ message: "Invalid link" });
         yield index_js_1.default.query("UPDATE customers SET verified = true WHERE id = $1", [rows[0].id]);
         yield index_js_1.default.query("DELETE FROM verification_tokens WHERE customerId=$1", [rows[0].id]);
-        res.status(200).json({ success: true, message: 'Email verified' });
+        res.status(200).send("<h1>Email Verified successful</h1>").json({ success: true, message: 'Email verified' });
     }
     catch (error) {
         console.log(error);
