@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
 import visibility from "../assets/icons/visibility-icon-13.jpg";
@@ -8,21 +8,21 @@ import facebook from "../assets/icons/facebook-icon.png";
 import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
+import { postRequest } from "../api/request";
 
 interface FormData {
-  fullName: string;
   email: string;
   password: string;
 }
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-
   const [formData, setFormData] = useState<FormData>({
-    fullName: "",
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,7 +35,11 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here,
-    console.log(formData);
+    postRequest("/customer-auth/login", formData).then((response) => {
+      const { accessToken, data } = response;
+      localStorage.setItem("accessToken", accessToken);
+      navigate("/");
+    });
   };
 
   const handleTogglePassword = () => {
