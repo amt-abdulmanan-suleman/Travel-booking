@@ -7,6 +7,8 @@ import Discover from "../components/Discover/Discover";
 import Cover from "../components/Cover/Cover";
 import TravelSwiper from "../components/Travel Swiper/TravelSwiper";
 import Experience from "../components/Experience/Experience";
+import Footer from "../components/Footer/Footer";
+import Destinations from "../components/Destinations/Destinations";
 
 const Home: React.FC = () => {
   // Your component logic here
@@ -27,6 +29,8 @@ const Home: React.FC = () => {
     <Cover />
     <TravelSwiper />
     <Experience />
+    <Destinations />
+    <Footer />
     </>
   )
 };
