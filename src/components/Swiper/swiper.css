@@ -55,6 +55,7 @@ gap: 8px;
   
   .card-content h5 {
     text-align: start;
+    font-weight: bold;
     margin: 0;
     font-size: 18px;
     color: #fff; /* Set the text color to white */

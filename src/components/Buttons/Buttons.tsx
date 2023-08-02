@@ -6,9 +6,9 @@ const Button: React.FC<{ url: string }> = ({ url }) => {
   // Your component logic here
   return (
     
-      <button className="basicBtn">
+      <a className="basicBtn">
         <Link className="btnLink" to={url}>Log in</Link>
-      </button>
+      </a>
     
   );
 };
