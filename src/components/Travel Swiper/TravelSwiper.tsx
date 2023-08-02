@@ -20,7 +20,7 @@ const TravelSwiper: React.FC = () => {
           <h1>Stay at our top unique properties</h1>
           <p>From castles and villas to boats and igloos, we have it all</p>
    </div>
-    <div className="text-grey swiperContainer">
+    <div className="text-grey travelContainer">
       <Swiper>
         <SwiperSlide>
           <TravelCards imageUrl={image1} cardText="652,762 hotels" cardHeading="Hotels"  />

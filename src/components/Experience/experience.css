@@ -3,8 +3,7 @@
     justify-content: center;
     align-items: center;
     max-width:1216px;
-    height: auto;
-   
+    height: auto;   
     align-items: center;
     justify-content: center;
     border-radius: 8px;
@@ -80,3 +79,50 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
+
+@media screen and (max-width: 1190px){
+    .experienceframe{
+       max-width: auto;
+       align-items: center;
+       justify-content: center;
+       margin: 1px 5vw 2rem 5vw;
+    }
+
+   .experienceText .experiencedata span{
+    max-width: 70px;
+}
+
+.experienceText .description span{
+font-size: 12px;
+}
+
+.experienceText .heading{
+    font-size: 16px;
+    }
+    
+ }
+
+ @media screen and (max-width: 850px){
+    .experienceframe{
+        width: 100%;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .experiencecontent{
+        width: 90%;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .experienceText, .imgBox1, .imgBox2{
+        width: 98%;
+    }
+
+    .experienceText .experiencedata span{
+        max-width: 80px;
+    }
+   
+  }
