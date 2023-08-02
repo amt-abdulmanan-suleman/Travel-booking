@@ -1,10 +1,11 @@
 .coverframe{
     display: flex;
-   width: 80%;
+   max-width:1216px;
    padding: 36px 74px;
     align-items: center;
     justify-content: center;
     border: 1px solid green;
     margin: 0px auto 2.4rem auto;
     height: 38rem;
+    background-color: #f1f1f1;
 }
