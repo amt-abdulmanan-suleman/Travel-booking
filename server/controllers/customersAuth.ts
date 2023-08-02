@@ -47,8 +47,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
         await db.query("UPDATE customers SET verified = true WHERE id = $1", [rows[0].id])
         await db.query("DELETE FROM verification_tokens WHERE customerId=$1",[rows[0].id])
 
-        res.status(200).send("<h1>Email Verified successful</h1>").json({success:true,message: 'Email verified'})
-
+        res.status(200).json({success:true,message: 'Email verified'})
     } catch (error) {
         console.log(error)
         res.status(500).json({success:false, message: 'Email not verified'})
