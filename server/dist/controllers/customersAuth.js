@@ -54,7 +54,7 @@ const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return res.status(400).send({ message: "Invalid link" });
         yield index_js_1.default.query("UPDATE customers SET verified = true WHERE id = $1", [rows[0].id]);
         yield index_js_1.default.query("DELETE FROM verification_tokens WHERE customerId=$1", [rows[0].id]);
-        res.status(200).send("<h1>Email Verified successful</h1>").json({ success: true, message: 'Email verified' });
+        res.status(200).json({ success: true, message: 'Email verified' });
     }
     catch (error) {
         console.log(error);
