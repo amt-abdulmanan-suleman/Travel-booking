@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -17,6 +17,9 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser());
 
+app.get('/',(req:Request, res: Response)=>{
+    res.send("<h1>TRAVEL BOOKING SERVER</h1>")
+})
 
 //routes
 app.use("/customer-auth",customerRouter)
