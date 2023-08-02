@@ -8,18 +8,18 @@ import facebook from "../assets/icons/facebook-icon.png";
 import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
+import { postRequest } from "../api/request";
 
 interface FormData {
-  fullName: string;
+  fullname: string;
   email: string;
   password: string;
 }
 
 const CustomerSignup: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
   const [formData, setFormData] = useState<FormData>({
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
   });
@@ -35,7 +35,9 @@ const CustomerSignup: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here,
-    console.log(formData);
+    postRequest("/customer-auth/signup", formData).then((response) => {
+      alert(response.message);
+    });
   };
 
   const handleTogglePassword = () => {
@@ -50,15 +52,15 @@ const CustomerSignup: React.FC = () => {
           <h2 className="form__title">Sign up</h2>
           <form onSubmit={handleSubmit}>
             <div className="form__input">
-              <label htmlFor="fullName" className="label">
+              <label htmlFor="fullname" className="label">
                 Full Name
               </label>
               <input
                 type="text"
-                id="fullName"
-                name="fullName"
+                id="fullname"
+                name="fullname"
                 placeholder="Type full name"
-                value={formData.fullName}
+                value={formData.fullname}
                 onChange={handleChange}
                 required
               />
