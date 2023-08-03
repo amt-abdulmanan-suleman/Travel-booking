@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.css"
+import Logo from "../Logo/Logo";
 
 const Footer: React.FC = () => {
   // Your component logic here
@@ -7,7 +8,7 @@ const Footer: React.FC = () => {
    <>
    <div className="footer">
    <div className="footerTextArea">
-
+     <Logo />
    </div>
    </div>
    </> 
