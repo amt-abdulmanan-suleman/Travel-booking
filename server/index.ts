@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import customerRouter from './routes/customerRoutes'
+import businessRouter from './routes/businessRoutes'
 
 dotenv.config()
 const app = express();
@@ -23,6 +24,7 @@ app.get('/',(req:Request, res: Response)=>{
 
 //routes
 app.use("/customer-auth",customerRouter)
+app.use("/business-auth", businessRouter)
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)
 })

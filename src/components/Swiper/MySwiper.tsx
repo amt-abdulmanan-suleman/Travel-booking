@@ -9,6 +9,8 @@ import image3 from "../../assets/images/homepage/discover3.png";
 import image4 from "../../assets/images/homepage/discover4.png";
 import image5 from "../../assets/images/homepage/discover5.png";
 import image6 from "../../assets/images/homepage/discover6.png";
+import image7 from "../../assets/images/homepage/discover7.png";
+
 
 const MySwiper: React.FC = () => {
   return (
@@ -30,7 +32,10 @@ const MySwiper: React.FC = () => {
         <DiscoverCards imageUrl={image5} cardText="France"  />
         </SwiperSlide>
         <SwiperSlide>
-        <DiscoverCards imageUrl={image6} cardText="Safari"  />
+        <DiscoverCards imageUrl={image6} cardText="Grand Canyon"  />
+        </SwiperSlide>
+        <SwiperSlide>
+        <DiscoverCards imageUrl={image7} cardText="Myanmmar"  />
         </SwiperSlide>
       </Swiper>
     </div>

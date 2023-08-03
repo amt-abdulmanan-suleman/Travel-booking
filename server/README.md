@@ -97,7 +97,33 @@ Response body:
    "message": "Email verified"
 }
 ```
+### `POST /business-auth/signup`
 
+Register a new user account.
+
+Request body:
+
+```json
+{
+  "name": "business_name",
+  "type": "business_type",
+  "address": "business_address",
+  "email": "business_email",
+  "phone": "business_phone",
+  "website": "business_website",
+  "description": "business_description",
+  "password": "business_password"
+}
+
+```
+Response body:
+
+```json
+{
+  "success": true,
+  "message": "email sent to your account, please verify"
+}
+```
 ## Environment Variables
 
 The Travel Booking Server uses the following environment variables. Make sure to set these in the `.env` file:
