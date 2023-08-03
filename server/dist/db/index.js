@@ -8,7 +8,12 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const { Pool } = pg_1.default;
 const pool = new Pool({
-    connectionString: process.env.POSTGRES_URL + "?sslmode=require"
+    // connectionString: process.env.POSTGRES_URL + "?sslmode=require"
+    user: "postgres",
+    password: "dallas",
+    host: "localhost",
+    database: "travel_booking",
+    port: 5432,
 });
 pool.connect((err) => {
     if (err)

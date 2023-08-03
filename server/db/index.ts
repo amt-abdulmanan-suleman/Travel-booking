@@ -7,7 +7,12 @@ dotenv.config()
 const {Pool} = pkg
 
 const pool = new Pool({
-    connectionString: process.env.POSTGRES_URL + "?sslmode=require"
+    // connectionString: process.env.POSTGRES_URL + "?sslmode=require"
+    user: "postgres",
+    password: "dallas",
+    host: "localhost",
+    database: "travel_booking",
+    port: 5432,
 });
   
 pool.connect((err)=>{
