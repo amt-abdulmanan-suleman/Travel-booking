@@ -53,64 +53,109 @@ export const verifyEmail = async(req:Request, res:Response) =>{
         res.status(500).json({success:false, message: 'Email not verified'})
     }
 }
- // You'll need to create this function
 
-export const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-
-  try {
-    const { rows } = await db.query('select * from customers where email=$1', [email]);
-
-    if (!rows[0]) {
-      return res.status(404).json({
-        success: false,
-        message: "User doesn't exist",
-      });
-    }
-
-    // check if password is correct
-    const isCorrectPassword = await compare(password, rows[0].password);
-
-    if (!isCorrectPassword) {
-      return res.status(401).json({ success: false, message: "Wrong password" });
-    }
-
-    const { id, fullname, phonenumber, address } = rows[0];
-
-    // Create access token
-    const accessExpiresIn = 5; // 12 hours in seconds
-    const accessToken = jwt.sign(
-      { id: id, fullname: fullname },
-      SECRET as Secret,
-      { expiresIn: accessExpiresIn }
-    );
-
-    // Create refresh token
-    const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
-
-    // Set and send cookies to browser and client
-    res.cookie('accessToken', accessToken, {
-      httpOnly: true,
-      expires: new Date(Date.now() + accessExpiresIn * 1000),
-    });
-
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
-    });
-
-    res.status(200).json({
-      success: true,
-      accessToken,
-      refreshToken,
-      data: { id, fullname, email, phonenumber, address },
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: 'Login failed' });
-  }
-};
-
+ export const login = async (req: Request, res: Response) => {
+   const { email, password } = req.body;
+ 
+   try {
+     // Check in customers table
+     const { rows: customerRows } = await db.query('SELECT * FROM customers WHERE email = $1', [email]);
+ 
+     if (customerRows[0]) {
+       // User found in customers table
+ 
+       // Check if password is correct for the customer
+       const isCorrectPassword = await compare(password, customerRows[0].password);
+ 
+       if (!isCorrectPassword) {
+         return res.status(401).json({ success: false, message: "Wrong password" });
+       }
+ 
+       const { id, fullname, phonenumber, address } = customerRows[0];
+ 
+       // Create access token
+       const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
+       const accessToken = jwt.sign(
+         { id: id, fullname: fullname },
+         SECRET as Secret,
+         { expiresIn: accessExpiresIn }
+       );
+ 
+       // Create refresh token
+       const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+ 
+       // Set and send cookies to browser and client
+       res.cookie('accessToken', accessToken, {
+         httpOnly: true,
+         expires: new Date(Date.now() + accessExpiresIn * 1000),
+       });
+ 
+       res.cookie('refreshToken', refreshToken, {
+         httpOnly: true,
+         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
+       });
+ 
+       return res.status(200).json({
+         success: true,
+         accessToken,
+         refreshToken,
+         data: { id, fullname, email, phonenumber, address },
+       });
+     } else {
+       // If user not found in customers table, check in businesses table
+       const { rows: businessRows } = await db.query('SELECT * FROM businesses WHERE email = $1', [email]);
+ 
+       if (!businessRows[0]) {
+         return res.status(404).json({
+           success: false,
+           message: "User doesn't exist",
+         });
+       }
+ 
+       // Check if password is correct for the business
+       const isCorrectPassword = await compare(password, businessRows[0].password);
+ 
+       if (!isCorrectPassword) {
+         return res.status(401).json({ success: false, message: "Wrong password" });
+       }
+ 
+       const { id, name, type, phone, address, website, description } = businessRows[0];
+ 
+       // Create access token
+       const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
+       const accessToken = jwt.sign(
+         { id: id, name: name },
+         SECRET as Secret,
+         { expiresIn: "12d" }
+       );
+ 
+       // Create refresh token
+       const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+ 
+       // Set and send cookies to browser and client
+       res.cookie('accessToken', accessToken, {
+         httpOnly: true,
+         expires: new Date(Date.now() + expiresIn),
+       });
+ 
+       res.cookie('refreshToken', refreshToken, {
+         httpOnly: true,
+         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
+       });
+ 
+       return res.status(200).json({
+         success: true,
+         accessToken,
+         refreshToken,
+         data: { id, name, type, email, phone, address, website, description },
+       });
+     }
+   } catch (error) {
+     console.log(error);
+     return res.status(500).json({ success: false, message: 'Login failed' });
+   }
+ };
+ 
 
 export const logout =async (req:Request, res:Response) => {
     // Clear the access token cookie
