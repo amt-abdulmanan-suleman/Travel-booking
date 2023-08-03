@@ -17,7 +17,7 @@ export const register =async (req:Request, res:Response) => {
         [name, type, address, email, phone, website, description, hashedPassword])
         await db.query("insert into verification_tokens_business (businessId, token) values ($1, $2)",[rows[0].id, token]);
 
-        const url = `${process.env.BASE_URL}/business-auth/${rows[0].id}/verify/${token}`
+        const url = `https://travel-booking-tau.vercel.app/business-auth/${rows[0].id}/verify/${token}`
 
         await sendEmail(rows[0].email, "Verify Email", url)
         res.status(200).json({
