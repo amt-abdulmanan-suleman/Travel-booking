@@ -71,18 +71,18 @@ export const verifyEmail = async(req:Request, res:Response) =>{
          return res.status(401).json({ success: false, message: "Wrong password" });
        }
  
-       const { id, fullname, phonenumber, address } = customerRows[0];
+       const { id, isAdmin,fullname, phonenumber, address } = customerRows[0];
  
        // Create access token
        const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
        const accessToken = jwt.sign(
-         { id: id, fullname: fullname },
+         { id: id, isAdmin: isAdmin },
          SECRET as Secret,
          { expiresIn: accessExpiresIn }
        );
  
        // Create refresh token
-       const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+       const refreshToken = createRefreshToken(id, isAdmin); // Implement this function to create a refresh token
  
        // Set and send cookies to browser and client
        res.cookie('accessToken', accessToken, {
@@ -119,18 +119,18 @@ export const verifyEmail = async(req:Request, res:Response) =>{
          return res.status(401).json({ success: false, message: "Wrong password" });
        }
  
-       const { id, name, type, phone, address, website, description } = businessRows[0];
+       const { id, name,isAdmin,  type, phone, address, website, description } = businessRows[0];
  
        // Create access token
        const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
        const accessToken = jwt.sign(
-         { id: id, name: name },
+         { id: id, isAdmin: isAdmin },
          SECRET as Secret,
          { expiresIn: "12d" }
        );
  
        // Create refresh token
-       const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+       const refreshToken = createRefreshToken(id,isAdmin); // Implement this function to create a refresh token
  
        // Set and send cookies to browser and client
        res.cookie('accessToken', accessToken, {

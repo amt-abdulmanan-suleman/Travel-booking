@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import customerRouter from './routes/customerRoutes'
 import businessRouter from './routes/businessRoutes'
 import resetPasswordRouter from './routes/passwordResetRoutes'
+import accomodationRouter from './routes/accomodation'
+
 
 dotenv.config()
 const app = express();
@@ -27,6 +29,7 @@ app.get('/',(req:Request, res: Response)=>{
 app.use("/customer-auth",customerRouter)
 app.use("/business-auth", businessRouter)
 app.use("/reset-password",resetPasswordRouter)
+app.use("/api/accomodations", accomodationRouter)
 
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)

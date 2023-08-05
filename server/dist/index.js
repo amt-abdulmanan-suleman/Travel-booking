@@ -10,6 +10,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const customerRoutes_1 = __importDefault(require("./routes/customerRoutes"));
 const businessRoutes_1 = __importDefault(require("./routes/businessRoutes"));
 const passwordResetRoutes_1 = __importDefault(require("./routes/passwordResetRoutes"));
+const accomodation_1 = __importDefault(require("./routes/accomodation"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 app.use("/customer-auth", customerRoutes_1.default);
 app.use("/business-auth", businessRoutes_1.default);
 app.use("/reset-password", passwordResetRoutes_1.default);
+app.use("/api/accomodations", accomodation_1.default);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
