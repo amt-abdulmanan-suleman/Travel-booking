@@ -7,10 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.refreshAccessToken = exports.createRefreshToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
-const createRefreshToken = (userId) => {
+const createRefreshToken = (userId, isAdmin) => {
     // Create a refresh token with an expiration time (e.g., 30 days)
     const refreshExpiresIn = 30 * 24 * 60 * 60; // 30 days in seconds
-    const refreshToken = jsonwebtoken_1.default.sign({ userId }, config_1.SECRET, { expiresIn: refreshExpiresIn });
+    const refreshToken = jsonwebtoken_1.default.sign({ userId, isAdmin }, config_1.SECRET, { expiresIn: refreshExpiresIn });
     return refreshToken;
 };
 exports.createRefreshToken = createRefreshToken;
@@ -22,10 +22,10 @@ const refreshAccessToken = (req, res) => {
     try {
         // Verify the refresh token
         const decoded = jsonwebtoken_1.default.verify(refreshToken, config_1.SECRET);
-        const { userId } = decoded;
+        const { userId, isAdmin } = decoded;
         // If the refresh token is valid, issue a new access token
         const accessExpiresIn = 5; // 12 hours in seconds
-        const accessToken = jsonwebtoken_1.default.sign({ id: userId }, config_1.SECRET, { expiresIn: accessExpiresIn });
+        const accessToken = jsonwebtoken_1.default.sign({ id: userId, isAdmin: isAdmin }, config_1.SECRET, { expiresIn: accessExpiresIn });
         // Set and send the new access token in the response
         res.cookie('accessToken', accessToken, {
             httpOnly: true,

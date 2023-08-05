@@ -74,12 +74,12 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (!isCorrectPassword) {
                 return res.status(401).json({ success: false, message: "Wrong password" });
             }
-            const { id, fullname, phonenumber, address } = customerRows[0];
+            const { id, isAdmin, fullname, phonenumber, address } = customerRows[0];
             // Create access token
             const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
-            const accessToken = jsonwebtoken_1.default.sign({ id: id, fullname: fullname }, config_1.SECRET, { expiresIn: accessExpiresIn });
+            const accessToken = jsonwebtoken_1.default.sign({ id: id, isAdmin: isAdmin }, config_1.SECRET, { expiresIn: accessExpiresIn });
             // Create refresh token
-            const refreshToken = (0, auth_1.createRefreshToken)(id); // Implement this function to create a refresh token
+            const refreshToken = (0, auth_1.createRefreshToken)(id, isAdmin); // Implement this function to create a refresh token
             // Set and send cookies to browser and client
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
@@ -110,12 +110,12 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (!isCorrectPassword) {
                 return res.status(401).json({ success: false, message: "Wrong password" });
             }
-            const { id, name, type, phone, address, website, description } = businessRows[0];
+            const { id, name, isAdmin, type, phone, address, website, description } = businessRows[0];
             // Create access token
             const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
-            const accessToken = jsonwebtoken_1.default.sign({ id: id, name: name }, config_1.SECRET, { expiresIn: "12d" });
+            const accessToken = jsonwebtoken_1.default.sign({ id: id, isAdmin: isAdmin }, config_1.SECRET, { expiresIn: "12d" });
             // Create refresh token
-            const refreshToken = (0, auth_1.createRefreshToken)(id); // Implement this function to create a refresh token
+            const refreshToken = (0, auth_1.createRefreshToken)(id, isAdmin); // Implement this function to create a refresh token
             // Set and send cookies to browser and client
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
