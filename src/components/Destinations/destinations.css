@@ -56,7 +56,9 @@ line-height: 147.523%; /* 23.604px */
 
 @media screen and (max-width: 850px){
     .destinations{
-       margin-top: 42rem;
+       margin-top: 40rem;
+       margin-left: 15px;
+       margin-right: 15px;
     } 
   
 }
@@ -67,10 +69,11 @@ line-height: 147.523%; /* 23.604px */
       }
 
       .destinationInfo{
-        gap: 95px;
+        gap: 65px;
       }
 
       .destination:last-child {
         display: none;
       }
+
 }
