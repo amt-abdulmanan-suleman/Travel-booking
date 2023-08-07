@@ -1,40 +1,25 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
-import facebook from "../assets/icons/facebook-icon.png";
-import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
-
-interface FormData {
-  email: string;
-}
+import { toast } from "react-toastify";
 
 const CheckEmail: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-  });
+  const [searchParams] = useSearchParams();
 
-  const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const resendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here,
-    postRequest("/customer-auth/login", formData).then((response: { accessToken: any; formData: any; }) => {
-      const { accessToken, formData } = response;
-      localStorage.setItem("accessToken", accessToken);
-      navigate("/");
+    const response = await postRequest("/forget-password", {
+      email: searchParams.get("email"),
     });
+
+    if (response) {
+      toast("Email sent", { type: "success" });
+    }
   };
 
   return (
@@ -44,27 +29,17 @@ const CheckEmail: React.FC = () => {
           <img src={mainLogo} alt="logo" />
           <h2 className="form__title">Check your email</h2>
           <p className="terms">
-          We sent a password reset link amaboateng3@gmail.com                  </p>
-          <form onSubmit={handleSubmit}>
-            <div className="form__input">
-              <label htmlFor="email" className="label">
-                Email address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Type email address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
+            We sent a password reset link amaboateng3@gmail.com{" "}
+          </p>
+          <form>
             <Button type="submit" block>
-            Open email            </Button>
+              Open email
+            </Button>
             <div className="login">
-            Didn’t receive the email? <Link to="/Login">Click to resend</Link>
+              Didn’t receive the email?{" "}
+              <a href="!#" onClick={resendEmail}>
+                Click to resend
+              </a>
             </div>
           </form>
         </div>

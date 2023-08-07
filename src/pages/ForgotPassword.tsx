@@ -2,39 +2,28 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
-import facebook from "../assets/icons/facebook-icon.png";
-import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
 
-interface FormData {
-  email: string;
-}
 
 const ForgotPassword: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    email: "",
-  });
-
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here,
-    postRequest("/customer-auth/login", formData).then((response: { accessToken: any; formData: any; }) => {
-      const { accessToken, formData } = response;
-      localStorage.setItem("accessToken", accessToken);
-      navigate("/");
-    });
+  const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const response = await postRequest("/forget-password", {email});
+
+    if(response){
+      navigate(`/check-email?email=${email}}`)
+    }
+
   };
 
   return (
@@ -56,7 +45,7 @@ const ForgotPassword: React.FC = () => {
                 id="email"
                 name="email"
                 placeholder="Type email address"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
                 required
               />

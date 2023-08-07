@@ -106,7 +106,7 @@ const Login: React.FC = () => {
                 )}
               </div>
             </div>
-            <p className="forgot-password">Forgot your password?</p>
+            <p className="forgot-password"> <Link className="forgot-password" to="/forgot-password">  Forgot your password?</Link></p>
             <p className="terms">
               By signing up, you agree to campsite’s Terms of Service and
               Privacy policy

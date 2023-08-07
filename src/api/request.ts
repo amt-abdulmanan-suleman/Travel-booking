@@ -12,7 +12,7 @@ export const refreshAccessToken = async () => {
   const refreshToken = localStorage.getItem("refresh-token");
   const {
     data: { access_token: accessToken },
-  } = await axiosClient.post("/refresh_token", {
+  } = await axiosClient.post("/customer-auth/refresh-token", {
     refresh_token: refreshToken,
   });
   return accessToken;

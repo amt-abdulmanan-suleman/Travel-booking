@@ -7,6 +7,8 @@ import visibilityOff from "../assets/icons/visibility_off.svg";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
+import { toast } from "react-toastify";
+
 
 interface FormData {
   businessName: string;
@@ -32,42 +34,55 @@ const BusinessSignup: React.FC = () => {
     password: "",
   });
 
-  // const validatePassword = (password: string): string | null => {
-  //   if (password.length < 8) {
-  //     return "Password must be at least 8 characters long.";
-  //   }
+  const validatePassword = (password: string): string | null => {
+    if (password.length < 8) {
+      return "Password must be at least 8 characters long.";
+    }
 
-  //   const hasUppercase = /[A-Z]/.test(password);
-  //   const hasLowercase = /[a-z]/.test(password);
-  //   const hasSpecialChars = /[!@#$%^&*()_+]/.test(password);
-  //   const hasNumbers = /\d/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasSpecialChars = /[!@#$%^&*()_+]/.test(password);
+    const hasNumbers = /\d/.test(password);
 
-  //   if (!(hasUppercase && hasLowercase && hasSpecialChars && hasNumbers)) {
-  //     return "Password must contain at least one uppercase letter, one lowercase letter, one special character, and one number.";
-  //   }
+    if (!(hasUppercase && hasLowercase && hasSpecialChars && hasNumbers)) {
+      return "Password must contain at least one uppercase letter, one lowercase letter, one special character, and one number.";
+    }
 
-  //   return null;
-  // };
+    return null;
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name === "password") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    postRequest("/business-auth/signup", formData).then((response: { message: string; }) => {
-      alert(response.message);
-    });
-    // Perform form submission here and handle backend logic for email verification and email uniqueness validation
-    // This part would require backend API calls and integration with email services
-    // You may use fetch, axios, or any other library to handle API requests
+    const passwordError = validatePassword(formData.password) || "";
+    if (passwordError) {
+      return toast(passwordError, {
+        type: "error",
+      });
+    }
+    postRequest("/business-auth/signup", formData).then(
+      (response: { message: string }) => {
+        return toast(response.message, { type: "success" });
+      }
+    );
   };
 
+  
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -167,7 +182,7 @@ const BusinessSignup: React.FC = () => {
                 id="businessDescription"
                 placeholder="Type business description"
                 value={formData.businessDescription}
-                // onChange={handleChange}
+                onChange={handleChange}
                 
               ></textarea>
             </div>
