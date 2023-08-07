@@ -4,24 +4,21 @@ import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
 import visibility from "../assets/icons/visibility-icon-13.jpg";
 import visibilityOff from "../assets/icons/visibility_off.svg";
-import facebook from "../assets/icons/facebook-icon.png";
-import google from "../assets/icons/google-logo.png";
+
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
 
-interface FormData {
-  fullname: string;
-  email: string;
-  password: string;
+interface PasswordFormData {
+  newPassword: string;
+  confirmPassword: string;
 }
 
-const CustomerSignup: React.FC = () => {
+const SetNewPassword: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    fullname: "",
-    email: "",
-    password: "",
+  const [formData, setFormData] = useState<PasswordFormData>({
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,10 +31,24 @@ const CustomerSignup: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here,
-    postRequest("/customer-auth/signup", formData).then((response) => {
-      alert(response.message);
-    });
+    //  password validation and submission
+    if (formData.newPassword !== formData.confirmPassword) {
+      alert("Passwords do not match. Please try again.");
+    } else if (!isPasswordValid(formData.newPassword)) {
+      // Handle password validity error
+      alert(
+        "Password must be at least 8 characters with upper and lower case characters, and 1 or more numbers."
+      );
+    } else {
+      // API call here
+      alert("Password set successfully!");
+    }
+  };
+
+  const isPasswordValid = (password: string): boolean => {
+    const passwordRegex =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z0-9!@#$%^&*()_+]{8,}$/;
+    return passwordRegex.test(password);
   };
 
   const handleTogglePassword = () => {
@@ -49,36 +60,11 @@ const CustomerSignup: React.FC = () => {
       <div className="form">
         <div className="form__inner">
           <img src={mainLogo} alt="logo" />
-          <h2 className="form__title">Sign up</h2>
+          <h2 className="form__title">Set new password</h2>
+          <p className="terms">
+            Your new password must be different to previously used passwords.
+          </p>
           <form onSubmit={handleSubmit}>
-            <div className="form__input">
-              <label htmlFor="fullname" className="label">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="fullname"
-                name="fullname"
-                placeholder="Type full name"
-                value={formData.fullname}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form__input">
-              <label htmlFor="email" className="label">
-                Email address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Type email address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
             <div className="form__input">
               <label htmlFor="password" className="label">
                 Password
@@ -89,7 +75,7 @@ const CustomerSignup: React.FC = () => {
                   id="password"
                   name="password"
                   placeholder="Type password"
-                  value={formData.password}
+                  value={formData.confirmPassword}
                   onChange={handleChange}
                   required
                   className="form__input__box__password"
@@ -111,25 +97,42 @@ const CustomerSignup: React.FC = () => {
                 )}
               </div>
             </div>
-            <p className="terms">
-              By signing up, you agree to campsite’s Terms of Service and
-              Privacy policy
-            </p>
-            <Button type="submit" block>
-              Sign up
-            </Button>
-            <h6 className="or">OR</h6>
-            <Button type="button" block outline>
-              <img src={google} alt="google icon" />
-              Google
-            </Button>
-            <Button type="button" block outline>
-              <img src={facebook} alt="google icon" />
-              Facebook
-            </Button>
-            <div className="login">
-              Have an account? <Link to="/Login">Login</Link>
+            <div className="form__input">
+              <label htmlFor="password" className="label">
+                Confirm password{" "}
+              </label>
+              <div className="form__input__box">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  placeholder="Confirm password "
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                  className="form__input__box__password"
+                />
+                {showPassword ? (
+                  <img
+                    src={visibility}
+                    alt="show password"
+                    onClick={handleTogglePassword}
+                    className="toggle-icon"
+                  />
+                ) : (
+                  <img
+                    src={visibilityOff}
+                    alt="hide password"
+                    onClick={handleTogglePassword}
+                    className="toggle-icon"
+                  />
+                )}
+              </div>
             </div>
+
+            <Button type="submit" block>
+              Reset Password
+            </Button>
           </form>
         </div>
       </div>
@@ -140,4 +143,4 @@ const CustomerSignup: React.FC = () => {
   );
 };
 
-export default CustomerSignup;
+export default SetNewPassword;
