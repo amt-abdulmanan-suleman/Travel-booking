@@ -62,47 +62,80 @@ const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.verifyEmail = verifyEmail;
-// You'll need to create this function
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     try {
-        const { rows } = yield index_js_1.default.query('select * from customers where email=$1', [email]);
-        if (!rows[0]) {
-            return res.status(404).json({
-                success: false,
-                message: "User doesn't exist",
+        // Check in customers table
+        const { rows: customerRows } = yield index_js_1.default.query('SELECT * FROM customers WHERE email = $1', [email]);
+        if (customerRows[0]) {
+            // User found in customers table
+            // Check if password is correct for the customer
+            const isCorrectPassword = yield (0, bcrypt_1.compare)(password, customerRows[0].password);
+            if (!isCorrectPassword) {
+                return res.status(401).json({ success: false, message: "Wrong password" });
+            }
+            const { id, fullname, phonenumber, address } = customerRows[0];
+            // Create access token
+            const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
+            const accessToken = jsonwebtoken_1.default.sign({ id: id, fullname: fullname }, config_1.SECRET, { expiresIn: accessExpiresIn });
+            // Create refresh token
+            const refreshToken = (0, auth_1.createRefreshToken)(id); // Implement this function to create a refresh token
+            // Set and send cookies to browser and client
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                expires: new Date(Date.now() + accessExpiresIn * 1000),
+            });
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
+            });
+            return res.status(200).json({
+                success: true,
+                accessToken,
+                refreshToken,
+                data: { id, fullname, email, phonenumber, address },
             });
         }
-        // check if password is correct
-        const isCorrectPassword = yield (0, bcrypt_1.compare)(password, rows[0].password);
-        if (!isCorrectPassword) {
-            return res.status(401).json({ success: false, message: "Wrong password" });
+        else {
+            // If user not found in customers table, check in businesses table
+            const { rows: businessRows } = yield index_js_1.default.query('SELECT * FROM businesses WHERE email = $1', [email]);
+            if (!businessRows[0]) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User doesn't exist",
+                });
+            }
+            // Check if password is correct for the business
+            const isCorrectPassword = yield (0, bcrypt_1.compare)(password, businessRows[0].password);
+            if (!isCorrectPassword) {
+                return res.status(401).json({ success: false, message: "Wrong password" });
+            }
+            const { id, name, type, phone, address, website, description } = businessRows[0];
+            // Create access token
+            const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
+            const accessToken = jsonwebtoken_1.default.sign({ id: id, name: name }, config_1.SECRET, { expiresIn: "12d" });
+            // Create refresh token
+            const refreshToken = (0, auth_1.createRefreshToken)(id); // Implement this function to create a refresh token
+            // Set and send cookies to browser and client
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                expires: new Date(Date.now() + expiresIn),
+            });
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
+            });
+            return res.status(200).json({
+                success: true,
+                accessToken,
+                refreshToken,
+                data: { id, name, type, email, phone, address, website, description },
+            });
         }
-        const { id, fullname, phonenumber, address } = rows[0];
-        // Create access token
-        const accessExpiresIn = 5; // 12 hours in seconds
-        const accessToken = jsonwebtoken_1.default.sign({ id: id, fullname: fullname }, config_1.SECRET, { expiresIn: accessExpiresIn });
-        // Create refresh token
-        const refreshToken = (0, auth_1.createRefreshToken)(id); // Implement this function to create a refresh token
-        // Set and send cookies to browser and client
-        res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            expires: new Date(Date.now() + accessExpiresIn * 1000),
-        });
-        res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Refresh token expires in 30 days
-        });
-        res.status(200).json({
-            success: true,
-            accessToken,
-            refreshToken,
-            data: { id, fullname, email, phonenumber, address },
-        });
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ success: false, message: 'Login failed' });
+        return res.status(500).json({ success: false, message: 'Login failed' });
     }
 });
 exports.login = login;
