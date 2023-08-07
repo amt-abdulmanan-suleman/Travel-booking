@@ -106,7 +106,6 @@ font-size: 12px;
     .experienceframe{
         width: 100%;
         justify-content: flex-start;
-        align-items: flex-start;
         height: auto;
     }
 
