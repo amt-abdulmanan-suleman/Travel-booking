@@ -124,6 +124,134 @@ Response body:
   "message": "email sent to your account, please verify"
 }
 ```
+
+## Accommodations Routes
+
+### NB: You've to be registered/ register as a business to be authorized to access the create, delete and update routes.
+### `POST /api/accommodations`
+
+create a new accommodation
+
+Request body:
+
+```json
+{
+  "name": "name_of_accommodation",
+  "address": "address",
+  "description": "description of the accommodation",
+  "city": "city",
+  "country": "country",
+  "price": "price",
+  "capacity": "capacity",
+  "amenities": "an array of ammenities",
+  "rating": "accommodation's ratings"
+}
+
+```
+Response body:
+
+```json
+{
+  "success": true,
+  "message": "accommodations added successfully",
+  "data": "accommodatio's info"
+}
+```
+
+### `GET /api/accommodations`
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "array of accommodations"
+}
+```
+
+### `GET /api/accommodations/:id`
+
+fetch an accommodation
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "accommodations info"
+}
+```
+
+### `PATCH /api/accommodations/:id`
+
+Request body:
+```json
+{
+  "name": "new_name"
+}
+```
+
+Response body:
+```json
+{
+  "success" : true,
+  "message" : "accommodations updated successfully",
+  "data": "new updated info"
+}
+```
+
+
+### `DELETE /api/accommodations/:id`
+
+Response body:
+```json
+{
+  "success" : true,
+  "message" : "accommodation deleted successfully",
+}
+```
+
+## CART Routes
+### `POST /carts`
+
+add to carts
+
+Request body:
+
+```json
+{
+  "product_id": "id of the product",
+  "product_type": "type_of_product eg. accommodations, hotels etc.",
+  "user_id": "id_of_the user"
+}
+
+```
+Response body:
+
+```json
+{
+  "success": true,
+  "message": "Item added to cart",
+}
+```
+
+### `DELETE /cart/:item_id`
+
+Response body:
+```json
+{
+  "success" : true,
+  "message": "item removed from cart"
+}
+```
+
+### `GET /cart/:user_id`
+
+Response body: 
+```json
+{
+  "success": true,
+  "data": "an array of products added to cart by user"
+}
+```
 ## Environment Variables
 
 The Travel Booking Server uses the following environment variables. Make sure to set these in the `.env` file:
