@@ -143,6 +143,7 @@ Request body:
   "country": "country",
   "price": "price",
   "capacity": "capacity",
+  "images": "array of images converted to base64",
   "amenities": "an array of ammenities",
   "rating": "accommodation's ratings"
 }
