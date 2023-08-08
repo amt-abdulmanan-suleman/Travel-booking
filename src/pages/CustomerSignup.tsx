@@ -42,35 +42,35 @@ const CustomerSignup: React.FC = () => {
     return null;
   };
 
- const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-  if (name === "password") {
-    
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  } else {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
-};
+    if (name === "password") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const passwordError = validatePassword(formData.password) || "";
-    if(passwordError) {
-
+    if (passwordError) {
       return toast(passwordError, {
-       type:'error'
-     })
+        type: "error",
+      });
     }
-    postRequest("/customer-auth/signup", formData).then((response: { message: string; }) => {
-      alert(response.message);
-    });
+    postRequest("/customer-auth/signup", formData).then(
+      (response: { message: string }) => {
+        return toast(response.message, { type: "success" });
+      }
+    );
   };
 
   const handleTogglePassword = () => {
