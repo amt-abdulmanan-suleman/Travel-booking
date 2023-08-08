@@ -63,7 +63,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
  
      if (customerRows[0]) {
        // User found in customers table
- 
+       if(!customerRows[0].verified) return res.status(401).json({success: false, message:'check your email for verification email'})
        // Check if password is correct for the customer
        const isCorrectPassword = await compare(password, customerRows[0].password);
  
@@ -71,18 +71,18 @@ export const verifyEmail = async(req:Request, res:Response) =>{
          return res.status(401).json({ success: false, message: "Wrong password" });
        }
  
-       const { id, fullname, phonenumber, address } = customerRows[0];
+       const { id, isAdmin,fullname, phonenumber, address } = customerRows[0];
  
        // Create access token
        const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
        const accessToken = jwt.sign(
-         { id: id, fullname: fullname },
+         { id: id, isAdmin: isAdmin },
          SECRET as Secret,
          { expiresIn: accessExpiresIn }
        );
  
        // Create refresh token
-       const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+       const refreshToken = createRefreshToken(id, isAdmin); // Implement this function to create a refresh token
  
        // Set and send cookies to browser and client
        res.cookie('accessToken', accessToken, {
@@ -111,7 +111,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
            message: "User doesn't exist",
          });
        }
- 
+       if(!businessRows[0].verified) return res.status(401).json({success: false, message: "check your mail for verificaion link"})
        // Check if password is correct for the business
        const isCorrectPassword = await compare(password, businessRows[0].password);
  
@@ -119,18 +119,18 @@ export const verifyEmail = async(req:Request, res:Response) =>{
          return res.status(401).json({ success: false, message: "Wrong password" });
        }
  
-       const { id, name, type, phone, address, website, description } = businessRows[0];
+       const { id, name,isAdmin,  type, phone, address, website, description } = businessRows[0];
  
        // Create access token
        const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
        const accessToken = jwt.sign(
-         { id: id, name: name },
+         { id: id, isAdmin: isAdmin },
          SECRET as Secret,
          { expiresIn: "12d" }
        );
  
        // Create refresh token
-       const refreshToken = createRefreshToken(id); // Implement this function to create a refresh token
+       const refreshToken = createRefreshToken(id,isAdmin); // Implement this function to create a refresh token
  
        // Set and send cookies to browser and client
        res.cookie('accessToken', accessToken, {

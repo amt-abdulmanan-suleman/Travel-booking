@@ -8,7 +8,8 @@ import facebook from "../assets/icons/facebook-icon.png";
 import google from "../assets/icons/google-logo.png";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
-import { postRequest } from "../api/request";
+import { postRequest, setAuthToken } from "../api/request";
+import { toast } from "react-toastify";
 
 interface FormData {
   email: string;
@@ -32,14 +33,21 @@ const Login: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here,
-    postRequest("/customer-auth/login", formData).then((response) => {
-      const { accessToken, data } = response;
-      localStorage.setItem("accessToken", accessToken);
-      navigate("/");
+    const response = await postRequest("/customer-auth/login", formData);
+
+    const { accessToken, data, refreshToken } = response;
+
+    //TODO: setup store(redux or contextAPI) and save data
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
+    setAuthToken(accessToken)
+    toast("Login successful", {
+      type: "success",
     });
+    navigate("/welcome");
   };
 
   const handleTogglePassword = () => {
@@ -98,7 +106,7 @@ const Login: React.FC = () => {
                 )}
               </div>
             </div>
-            <p className="forgot-password">Forgot your password?</p>
+            <p className="forgot-password"> <Link className="forgot-password" to="/forgot-password">  Forgot your password?</Link></p>
             <p className="terms">
               By signing up, you agree to campsite’s Terms of Service and
               Privacy policy

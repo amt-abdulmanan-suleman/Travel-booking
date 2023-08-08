@@ -1,8 +1,7 @@
 .logoContainer{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
+  
 }
 
 .logoImage{
@@ -22,7 +21,7 @@ width: 61px;
 height: 10px;
 flex-shrink: 0;
 margin-left: -12px; 
-margin-top:  3px;
+margin-top:  auto;
 }
 
 

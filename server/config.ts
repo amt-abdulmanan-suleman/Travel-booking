@@ -15,3 +15,4 @@ export const DB_USER = process.env.DB_USER
 export const DB_NAME = process.env.DB_NAME
 export const HOST = process.env.HOST
 export const DB_PORT= process.env.DB_PORT
+export const STRIPE_KEY:any = process.env.STRIPE_SECRET_KEY
