@@ -4,6 +4,6 @@ import { changePassword, resetVerifyEmail } from '../controllers/passwordReset';
 const router = express.Router();
 
 router.post("/", resetVerifyEmail);
-router.post("/:id/reset/:token", changePassword)
+router.post("reset-password/:id/:token", changePassword)
 
 export default router;

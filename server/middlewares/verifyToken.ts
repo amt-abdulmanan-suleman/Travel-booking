@@ -4,6 +4,7 @@ import { createRefreshToken } from '../utils/auth'; // Assuming you have impleme
 
 interface User {
   id: string;
+  isAdmin: boolean;
 }
 
 declare global {
@@ -27,14 +28,14 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
   const issueNewAccessToken = async () => {
     try {
       const decoded = jwt.verify(refreshToken, process.env.SECRET as Secret);
-      const { userId } = decoded as { userId: string };
+      const { userId, isAdmin } = decoded as { userId: string, isAdmin:boolean };
 
       // Here, you should implement a function to validate the refresh token and ensure it is still valid.
       // For example, check if it exists in a database and hasn't expired.
 
       // Create a new access token
       const accessExpiresIn = 12 * 60 * 60; // 12 hours in seconds
-      const newAccessToken = jwt.sign({ id: userId }, process.env.SECRET as Secret, { expiresIn: accessExpiresIn });
+      const newAccessToken = jwt.sign({ id: userId, isAdmin:isAdmin }, process.env.SECRET as Secret, { expiresIn: accessExpiresIn });
 
       // Set and send the new access token in the response
       res.cookie('accessToken', newAccessToken, {
@@ -43,7 +44,7 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
       });
 
       // Assign the user to the request object for other middlewares/routes to use
-      req.user = { id: userId };
+      req.user = { id: userId, isAdmin: isAdmin };
 
       return true;
     } catch (error) {
@@ -81,9 +82,21 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
 };
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction): void => {
-  if (req.user?.id === req.params.id) {
-    next();
-  } else {
-    res.status(401).json({ success: false, message: 'Not authenticated' });
-  }
+  verifyToken(req,res,()=>{
+    if(req.user?.id || req.user?.isAdmin){
+      next();
+    }else {
+      res.status(401).json({ success: false, message: 'Not authorized'});
+    }
+  })
+};
+
+export const verifyAdmin = (req: Request, res: Response, next: NextFunction): void => {
+  verifyToken(req,res,()=>{
+    if(req.user?.isAdmin){
+      next();
+    }else {
+      res.status(401).json({ success: false, message: 'Not Admin'});
+    }
+  })
 };
