@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
       </div>
       <div className="mediaNavbar-sign">
       <div className="registration">
-        <span className="login"><Button url={menuList[3].url} >Log in</Button></span>
+        <span className="login"><Link to="/login"  >Log in</Link></span>
         <DropButton />
       </div>
       </div>

@@ -64,6 +64,15 @@
   justify-content: flex-end;
   align-items: center;
 }
+.login a {
+  text-decoration: none;
+  color: var(--primary, #3d3939);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-right: 36px;
+}
 
 .mediaNavbar-menu {
   margin-left: 1rem;
