@@ -23,7 +23,7 @@ const resetVerifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const { rows: customer } = yield db_1.default.query('select id from customers where email=$1', [email]);
         if (customer[0]) {
             const token = crypto_1.default.randomBytes(32).toString('hex');
-            const url = `http://localhost:8000/reset-password/${customer[0].id}/reset/${token}`;
+            const url = `http://localhost:8000/reset-password/${customer[0].id}/${token}`;
             yield (0, email_1.sendEmail)(email, "Password reset link", url);
             res.status(200).json({
                 success: true,
@@ -39,7 +39,7 @@ const resetVerifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, functio
                 });
             }
             const token = crypto_1.default.randomBytes(32).toString('hex');
-            const url = `http://localhost:8000/reset-password/${business[0].id}/reset/${token}`;
+            const url = `http://localhost:8000/reset-password/${business[0].id}/${token}`;
             yield (0, email_1.sendEmail)(email, "Password Reset", url);
             res.status(200).json({
                 success: true,

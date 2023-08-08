@@ -69,6 +69,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { rows: customerRows } = yield index_js_1.default.query('SELECT * FROM customers WHERE email = $1', [email]);
         if (customerRows[0]) {
             // User found in customers table
+            if (!customerRows[0].verified)
+                return res.status(401).json({ success: false, message: 'check your email for verification email' });
             // Check if password is correct for the customer
             const isCorrectPassword = yield (0, bcrypt_1.compare)(password, customerRows[0].password);
             if (!isCorrectPassword) {
@@ -105,6 +107,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     message: "User doesn't exist",
                 });
             }
+            if (!businessRows[0].verified)
+                return res.status(401).json({ success: false, message: "check your mail for verificaion link" });
             // Check if password is correct for the business
             const isCorrectPassword = yield (0, bcrypt_1.compare)(password, businessRows[0].password);
             if (!isCorrectPassword) {

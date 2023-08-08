@@ -1,6 +1,6 @@
 import express from 'express'
-import { createAccomodation, deleteAccomodation, getAccomodation, getAllAccomodation, updateAccomodation } from '../controllers/accomodation';
-import { verifyAdmin, verifyToken } from '../middlewares/verifyToken';
+import { createAccomodation, deleteAccomodation, getAccomodation, getAllAccomodation, getUserAccomodations, updateAccomodation } from '../controllers/accomodation';
+import { verifyAdmin, verifyToken, verifyUser } from '../middlewares/verifyToken';
 
 const router = express.Router();
 
@@ -10,6 +10,9 @@ router.post('/',verifyAdmin, createAccomodation)
 
 //GET ALL
 router.get('/', getAllAccomodation)
+
+// GET MY ACCOMMODATIONS I ADDED
+router.get('/:user_id/mine',verifyUser, getUserAccomodations);
 
 //GET
 router.get('/:id', getAccomodation)

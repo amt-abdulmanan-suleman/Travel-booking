@@ -7,6 +7,7 @@ import businessRouter from './routes/businessRoutes'
 import resetPasswordRouter from './routes/passwordResetRoutes'
 import accomodationRouter from './routes/accomodation'
 import cartRouter from './routes/cart';
+import purchaseRouter from './routes/purchase'
 
 
 dotenv.config()
@@ -29,9 +30,10 @@ app.get('/',(req:Request, res: Response)=>{
 //routes
 app.use("/customer-auth",customerRouter)
 app.use("/business-auth", businessRouter)
-app.use("/reset-password",resetPasswordRouter)
+app.use("/",resetPasswordRouter)
 app.use("/api/accomodations", accomodationRouter)
 app.use('/cart', cartRouter)
+app.use('/purchase', purchaseRouter)
 
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)

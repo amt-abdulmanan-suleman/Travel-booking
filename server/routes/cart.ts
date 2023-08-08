@@ -5,7 +5,7 @@ import { verifyUser } from '../middlewares/verifyToken';
 
 const router = express.Router();
 
-router.post('/',verifyUser, addToCart);
+router.post('/', verifyUser, addToCart);
 
 router.delete('/:item_id', verifyUser, removeFromCart);
 

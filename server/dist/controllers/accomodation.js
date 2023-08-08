@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAccomodation = exports.updateAccomodation = exports.getAccomodation = exports.getAllAccomodation = exports.createAccomodation = void 0;
+exports.deleteAccomodation = exports.updateAccomodation = exports.getUserAccomodations = exports.getAccomodation = exports.getAllAccomodation = exports.createAccomodation = void 0;
 const db_1 = __importDefault(require("../db"));
 const createAccomodation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -20,8 +20,8 @@ const createAccomodation = (req, res) => __awaiter(void 0, void 0, void 0, funct
         const placeholders = Object.keys(req.body).map((_, index) => `$${index + 1}`).join(', ');
         const insertQuery = `INSERT INTO accommodations (${columns}) VALUES (${placeholders}) RETURNING *`;
         const values = Object.values(req.body);
-        const result = yield db_1.default.query(insertQuery, values);
-        res.json({ success: true, message: 'Accommodation added successfully.', data: result.rows[0] });
+        const { rows } = yield db_1.default.query(insertQuery, values);
+        res.json({ success: true, message: 'Accommodation added successfully.', data: rows[0] });
     }
     catch (err) {
         console.error('Error adding accommodation:', err);
@@ -50,11 +50,20 @@ const getAccomodation = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.getAccomodation = getAccomodation;
+const getUserAccomodations = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user_id } = req.params;
+    try {
+        const { rows: accommodation } = yield db_1.default.query('select * from accommodations where business_id=$1', [user_id]);
+        res.status(200).json({ success: true, data: accommodation });
+    }
+    catch (error) {
+        res.status(500).json({ success: false, message: error });
+    }
+});
+exports.getUserAccomodations = getUserAccomodations;
 const updateAccomodation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     const { id } = req.params;
     const updates = req.body;
-    console.log((_a = req.user) === null || _a === void 0 ? void 0 : _a.id);
     try {
         const updateColumns = Object.keys(updates).map((key, index) => {
             return `${key} = $${index + 1}`;

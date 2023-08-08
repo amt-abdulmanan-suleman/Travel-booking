@@ -83,7 +83,7 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
 
 export const verifyUser = (req: Request, res: Response, next: NextFunction): void => {
   verifyToken(req,res,()=>{
-    if(req.user?.id === req.params.id || req.user?.isAdmin){
+    if(req.user?.id || req.user?.isAdmin){
       next();
     }else {
       res.status(401).json({ success: false, message: 'Not authorized'});

@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const passwordReset_1 = require("../controllers/passwordReset");
+const purchase_1 = require("../controllers/purchase");
+const verifyToken_1 = require("../middlewares/verifyToken");
 const router = express_1.default.Router();
-router.post("/", passwordReset_1.resetVerifyEmail);
-router.post("reset-password/:id/:token", passwordReset_1.changePassword);
+router.post('/', verifyToken_1.verifyUser, purchase_1.purchase);
 exports.default = router;

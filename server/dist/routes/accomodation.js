@@ -11,6 +11,8 @@ const router = express_1.default.Router();
 router.post('/', verifyToken_1.verifyAdmin, accomodation_1.createAccomodation);
 //GET ALL
 router.get('/', accomodation_1.getAllAccomodation);
+// GET MY ACCOMMODATIONS I ADDED
+router.get('/:user_id/mine', verifyToken_1.verifyUser, accomodation_1.getUserAccomodations);
 //GET
 router.get('/:id', accomodation_1.getAccomodation);
 //PATCH

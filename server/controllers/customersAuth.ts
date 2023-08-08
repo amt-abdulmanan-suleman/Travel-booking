@@ -63,7 +63,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
  
      if (customerRows[0]) {
        // User found in customers table
- 
+       if(!customerRows[0].verified) return res.status(401).json({success: false, message:'check your email for verification email'})
        // Check if password is correct for the customer
        const isCorrectPassword = await compare(password, customerRows[0].password);
  
@@ -111,7 +111,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
            message: "User doesn't exist",
          });
        }
- 
+       if(!businessRows[0].verified) return res.status(401).json({success: false, message: "check your mail for verificaion link"})
        // Check if password is correct for the business
        const isCorrectPassword = await compare(password, businessRows[0].password);
  

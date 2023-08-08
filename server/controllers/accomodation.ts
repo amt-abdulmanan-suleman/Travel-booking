@@ -10,9 +10,9 @@ export const createAccomodation =async (req: Request, res: Response) => {
         const insertQuery = `INSERT INTO accommodations (${columns}) VALUES (${placeholders}) RETURNING *`;
         const values = Object.values(req.body);
 
-        const result = await db.query(insertQuery, values);
+        const {rows} = await db.query(insertQuery, values);
 
-        res.json({ success:true, message: 'Accommodation added successfully.', data: result.rows[0] });
+        res.json({ success:true, message: 'Accommodation added successfully.', data:rows[0] });
     } catch (err) {
         console.error('Error adding accommodation:', err);
         res.status(500).json({ error: 'An error occurred while adding accommodation.' });
@@ -43,10 +43,20 @@ export const getAccomodation = async (req: Request, res: Response) => {
     }
 }
 
+export const getUserAccomodations = async (req: Request, res: Response) => {
+    const {user_id} = req.params
+    try {
+        const {rows: accommodation} = await db.query('select * from accommodations where business_id=$1',[user_id])
+
+        res.status(200).json({success: true, data: accommodation})
+    } catch (error) {
+        res.status(500).json({success: false, message:error})
+    }
+}
+
 export const updateAccomodation =async (req: Request, res: Response) => {
     const { id } = req.params;
     const updates = req.body;
-    console.log(req.user?.id)
     try {
         const updateColumns = Object.keys(updates).map((key, index) => {
             return `${key} = $${index + 1}`;

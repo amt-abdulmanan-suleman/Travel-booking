@@ -78,7 +78,7 @@ exports.verifyToken = verifyToken;
 const verifyUser = (req, res, next) => {
     (0, exports.verifyToken)(req, res, () => {
         var _a, _b;
-        if (((_a = req.user) === null || _a === void 0 ? void 0 : _a.id) === req.params.id || ((_b = req.user) === null || _b === void 0 ? void 0 : _b.isAdmin)) {
+        if (((_a = req.user) === null || _a === void 0 ? void 0 : _a.id) || ((_b = req.user) === null || _b === void 0 ? void 0 : _b.isAdmin)) {
             next();
         }
         else {

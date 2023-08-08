@@ -125,6 +125,43 @@ Response body:
 }
 ```
 
+### `POST /check-email`
+
+Request body
+
+```json
+{
+  email: "user_email"
+}
+```
+
+Response body
+
+```json
+{
+  success: true,
+  message: "reset password link sent"
+}
+```
+
+### `POST /reset-password/:id/:token`
+
+Request body 
+
+```json
+{
+  newPassword: "new_password"
+}
+```
+
+Response body
+
+```json
+{
+  success: true,
+  message: "password reset successful"
+}
+```
 ## Accommodations Routes
 
 ### NB: You've to be registered/ register as a business to be authorized to access the create, delete and update routes.
@@ -172,6 +209,17 @@ Response body:
 ### `GET /api/accommodations/:id`
 
 fetch an accommodation
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "accommodations info"
+}
+```
+### `GET /api/accommodations/:user_id/mine`
+
+fetch an array of the business' posted accommodations only
 
 Response body:
 ```json
@@ -253,6 +301,30 @@ Response body:
   "data": "an array of products added to cart by user"
 }
 ```
+
+
+## PURCHASE Routes
+
+### defines the purchase routes using stripe
+
+### `POST /purchase`
+
+Request body
+```json
+{
+  "stripeTokenId": "stripe token id from frontend",
+  "products": [{product_id, product_type}]
+}
+```
+Response body
+```json
+{
+  success: true,
+  message: "Transaction completed",
+  charge: "amount paid"
+}
+```
+
 ## Environment Variables
 
 The Travel Booking Server uses the following environment variables. Make sure to set these in the `.env` file:
