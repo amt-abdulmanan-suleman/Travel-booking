@@ -12,7 +12,7 @@ export const resetVerifyEmail = async (req:Request, res:Response) => {
 
         if(customer[0]){
             const token = crypto.randomBytes(32).toString('hex');
-            const url = `https://travel-booking-tau.vercel.app/business-auth/${customer[0].id}/verify/${token}`
+            const url = `http://localhost:8000/reset-password/${customer[0].id}/${token}`
 
             await sendEmail(email, "Password reset link", url)
             res.status(200).json({
@@ -29,7 +29,7 @@ export const resetVerifyEmail = async (req:Request, res:Response) => {
                 });
             }
             const token = crypto.randomBytes(32).toString('hex');
-            const url = `https://travel-booking-tau.vercel.app/reset-password/${business[0].id}/reset/${token}`
+            const url = `http://localhost:8000/reset-password/${business[0].id}/${token}`
 
             await sendEmail(email, "Password Reset", url)
             res.status(200).json({

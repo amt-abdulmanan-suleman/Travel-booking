@@ -4,10 +4,10 @@ import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import { SECRET } from '../config';
 
-export const createRefreshToken = (userId: number) => {
+export const createRefreshToken = (userId: number, isAdmin:boolean) => {
   // Create a refresh token with an expiration time (e.g., 30 days)
   const refreshExpiresIn = 30 * 24 * 60 * 60; // 30 days in seconds
-  const refreshToken = jwt.sign({ userId }, SECRET as Secret, { expiresIn: refreshExpiresIn });
+  const refreshToken = jwt.sign({ userId, isAdmin }, SECRET as Secret, { expiresIn: refreshExpiresIn });
   return refreshToken;
 };
 
@@ -21,11 +21,11 @@ export const refreshAccessToken = (req: Request, res: Response) => {
   try {
     // Verify the refresh token
     const decoded = jwt.verify(refreshToken, SECRET as Secret);
-    const { userId } = decoded as { userId: number };
+    const { userId, isAdmin } = decoded as { userId: number, isAdmin:boolean };
 
     // If the refresh token is valid, issue a new access token
     const accessExpiresIn = 5; // 12 hours in seconds
-    const accessToken = jwt.sign({ id: userId }, SECRET as Secret, { expiresIn: accessExpiresIn });
+    const accessToken = jwt.sign({ id: userId, isAdmin:isAdmin }, SECRET as Secret, { expiresIn: accessExpiresIn });
 
     // Set and send the new access token in the response
     res.cookie('accessToken', accessToken, {
