@@ -9,7 +9,6 @@ import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
 import { toast } from "react-toastify";
 
-
 interface FormData {
   businessName: string;
   businessEmail: string;
@@ -51,7 +50,9 @@ const BusinessSignup: React.FC = () => {
     return null;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     if (name === "password") {
@@ -82,7 +83,6 @@ const BusinessSignup: React.FC = () => {
     );
   };
 
-  
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -91,7 +91,7 @@ const BusinessSignup: React.FC = () => {
     <div className="wrapper">
       <div className="form">
         <div className="form__inner">
-          <img src={mainLogo} alt="logo" />
+          <img className="form__logo" src={mainLogo} alt="logo" />
           <h2 className="form__title">Business Sign Up</h2>
           <form onSubmit={handleSubmit}>
             <div className="form__input">
@@ -183,7 +183,6 @@ const BusinessSignup: React.FC = () => {
                 placeholder="Type business description"
                 value={formData.businessDescription}
                 onChange={handleChange}
-                
               ></textarea>
             </div>
             <div className="form__input">

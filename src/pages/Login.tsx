@@ -57,7 +57,7 @@ const Login: React.FC = () => {
     <div className="wrapper">
       <div className="form">
         <div className="form__inner">
-          <img src={mainLogo} alt="logo" />
+          <img className="form__logo" src={mainLogo} alt="logo" />
           <h2 className="form__title">Log in</h2>
           <form onSubmit={handleSubmit}>
             <div className="form__input">

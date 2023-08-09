@@ -9,6 +9,11 @@
     align-items: center;
     justify-content: center;
 
+    &__logo{
+      position: fixed;
+      top: 40px;
+    }
+
     &__inner {
       max-width: 450px;
       width: 100%;
@@ -18,9 +23,11 @@
       font-size: 40.407px;
       font-weight: 700;
       margin-bottom: 30px;
-      margin-top: 64px;
+      // margin-top: 64px;
       font-family: Inter;
     }
+   
+
     form {
       display: flex;
       flex-direction: column;
@@ -84,7 +91,13 @@
       font-size: 12px;
       font-weight: 400;
       font-family: Inter;
+
     }
+    
+    .centered{
+      text-align: center;
+    }
+
     .or {
       margin: 0;
       text-align: center;
