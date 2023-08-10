@@ -64,6 +64,9 @@ line-height: 147.523%; /* 23.604px */
 }
 
 @media screen and (max-width: 550px){
+    .destinations{
+        margin-top: 20rem;
+     } 
     .destination:nth-child(2){
         margin-left: auto;
       }

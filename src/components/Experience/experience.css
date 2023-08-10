@@ -41,6 +41,7 @@ font-size: 24px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -1rem;
 }
 
 .experienceText .description{
@@ -61,6 +62,7 @@ line-height: normal;
     display: flex;
     flex-direction: column;
     width: 100px;
+
 }
 
 .experienceText .experiencedata span p{
@@ -70,6 +72,7 @@ font-size: 20px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -1rem;
 }
 
 .experienceText .experiencedata span h6{
@@ -101,6 +104,12 @@ font-size: 12px;
     font-size: 16px;
     }
     
+ }
+
+ @media screen and (max-width: 1250px){
+    img{
+        width: 100%;
+    }
  }
 
  @media screen and (max-width: 850px){
@@ -144,8 +153,8 @@ font-size: 12px;
      }
 
      .imgBox1 img, .imgBox2 img{
-        width: 375px;
-        height: 224px;
+        width: 575px;
+        height: 424px;
         flex-shrink: 0;
         object-fit: cover;
      }

@@ -23,17 +23,17 @@ gap: 8px;
     margin: 0px 40px 0px 0px;
   }
   
-  /* .swiper-slide .swiper-wrapper {
-
-  } */
-
-  
+ .travelcard-container{
+  box-shadow: none;
+  border-radius: 8px;
+ }  
 
   .swiper-slide .swiper-wrapper img {
     display: block;
     max-width: 15.9375rem;
     height: 100%;
     object-fit: cover;
+    
   }
 
   .travel{
@@ -57,6 +57,7 @@ gap: 8px;
   flex-direction: column;
   gap: 0.5rem;
   margin-top: 0.7rem;
+  margin-bottom: 0.2rem;
 }
 
 .travelCard .cardText{
@@ -70,6 +71,8 @@ font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -1.3rem;
+margin-top: -0.6rem;
 }
 
 .travelCard .cardText h5{
@@ -88,6 +91,7 @@ font-size: 24px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -0.7rem;
 }
 
 .travelTextArea p{
@@ -104,6 +108,10 @@ line-height: normal;
   gap: 0.5rem;
   width: 80%;
   flex-direction: column;
+}
+
+.card-image img{
+  border-radius: 8px;
 }
   
 
@@ -203,5 +211,14 @@ line-height: normal;
     .travelCard .card-image img {
       height: auto;
     }
+
+    .travelTextArea h1{
+      margin-bottom: -0.9rem;
+   }
+
+   .travelCard .cardText p{
+     margin-bottom: -1.25rem;
+     margin-top: -0.55rem;
+   }
     
   }

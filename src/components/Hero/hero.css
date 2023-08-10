@@ -51,6 +51,17 @@ font-weight: 400;
 line-height: normal;
 }
 
+
+@media screen and (max-width: 1250px) {
+    .heroText{
+        width: 80%;
+    }
+
+    .heroText h1{
+        font-size: 38px;
+    }
+}
+
 @media screen and (max-width: 820px) {
     .heroText{
         width: 90%;
