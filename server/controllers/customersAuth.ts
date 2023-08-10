@@ -47,7 +47,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
         await db.query("UPDATE customers SET verified = true WHERE id = $1", [rows[0].id])
         await db.query("DELETE FROM verification_tokens WHERE customerId=$1",[rows[0].id])
 
-        res.status(200).json({success:true,message: 'Email verified'})
+        res.redirect('http://localhost:8000/login');
     } catch (error) {
         console.log(error)
         res.status(500).json({success:false, message: 'Email not verified'})
@@ -119,7 +119,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
          return res.status(401).json({ success: false, message: "Wrong password" });
        }
  
-       const { id, name,isAdmin,  type, phone, address, website, description } = businessRows[0];
+       const { id, name,isAdmin, category, phone, address, website, description } = businessRows[0];
  
        // Create access token
        const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
@@ -147,7 +147,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
          success: true,
          accessToken,
          refreshToken,
-         data: { id, name, type, email, phone, address, website, description },
+         data: { id, name, category, email, phone, address, website, description },
        });
      }
    } catch (error) {
