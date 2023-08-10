@@ -27,15 +27,15 @@ const CheckEmail: React.FC = () => {
       <div className="form">
         <div className="form__inner">
           <img className="form__logo" src={mainLogo} alt="logo" />
-          <h2 className="form__title centered">Check your email</h2>
-          <p className="terms centered">
-            We sent a password reset link
-          </p>
-          <p className="terms centered"> amaboateng3@gmail.com</p>
+          <h2 className="form__title centered reset">Check your email</h2>
+          <p className="terms centered">We sent a password reset link</p>
+          <p className="terms centered">{searchParams.get("email")} </p>
           <form>
-            <Button type="submit" block>
-              Open email
-            </Button>
+            <a href="https://mail.google.com" target="_blank" rel="noreferrer">
+              <Button block>
+                Open email
+              </Button>
+            </a>
             <div className="login">
               Didn’t receive the email?
               <a href="!#" onClick={resendEmail}>
