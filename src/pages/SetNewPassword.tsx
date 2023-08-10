@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
 import visibility from "../assets/icons/visibility-icon-13.jpg";
@@ -7,6 +7,7 @@ import visibilityOff from "../assets/icons/visibility_off.svg";
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
+import { toast } from "react-toastify";
 
 interface PasswordFormData {
   newPassword: string;
@@ -15,6 +16,8 @@ interface PasswordFormData {
 
 const SetNewPassword: React.FC = () => {
   const { id, token } = useParams();
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<PasswordFormData>({
     newPassword: "",
@@ -44,8 +47,11 @@ const SetNewPassword: React.FC = () => {
       const response = await postRequest(`/reset-password/${id}/${token}`, {
         newPassword: formData.newPassword,
       });
+      if(response){
+        toast("Password set successfully!", { type: "success" });
+        navigate(`/login`)
+      }
 
-      alert("Password set successfully!");
     }
   };
 
