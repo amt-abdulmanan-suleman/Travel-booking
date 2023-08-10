@@ -194,6 +194,9 @@ line-height: normal;
   }
 
   @media screen and (max-width: 1250px){
+    .travelTextArea {
+      width: 90%;
+    }
     .travelContainer{
       width: 100%;
       padding: 1px 5vw;
