@@ -7,14 +7,14 @@ import crypto from 'crypto'
 
 
 
-export const register =async (req:Request, res:Response) => {
-    const {name, type, address, email, phone, website, description, password} = req.body;
+export const register = async (req:Request, res:Response) => {
+    const {name, email, address, phone, category, website, description, password} = req.body;
 
     try {
         const hashedPassword = await hash(password, 10);
         const token = crypto.randomBytes(32).toString('hex')
-        const {rows} = await db.query("insert into businesses (name, type, address, email, phone, website, description, password) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *", 
-        [name, type, address, email, phone, website, description, hashedPassword])
+        const {rows} = await db.query("insert into businesses (name, emial, address, phone, category, website, description, password) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *", 
+        [name, email, address, phone, category, website, description, hashedPassword])
         await db.query("insert into verification_tokens_business (businessId, token) values ($1, $2)",[rows[0].id, token]);
 
         const url = `https://travel-booking-tau.vercel.app/business-auth/${rows[0].id}/verify/${token}`
@@ -46,7 +46,7 @@ export const verifyEmail = async(req:Request, res:Response) =>{
         await db.query("UPDATE businesses SET verified = true WHERE id = $1", [rows[0].id])
         await db.query("DELETE FROM verification_tokens_business WHERE businessId=$1",[rows[0].id])
 
-        res.status(200).json({success:true,message: 'Email verified'})
+        res.redirect('http://localhost:8000/login')
 
     } catch (error) {
         console.log(error)
