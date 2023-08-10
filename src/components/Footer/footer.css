@@ -60,6 +60,8 @@ gap: 10px;
 flex-shrink: 0;
 border-radius: 6px;
 background: #FFF;
+border: none;
+outline: none;
 }
 
 .footerTextArea .right .buttongroup input::placeholder{
@@ -86,6 +88,8 @@ gap: 10px;
 flex-shrink: 0;
 border-radius: 6px;
 background: #6B70BD;
+border: none;
+outline: none;
 }
 
 .footerTextArea .right .socials{
