@@ -100,7 +100,7 @@ line-height: normal;
     margin-left: auto;
   }
   
-  @media screen and (max-width: 1190px){
+  @media screen and (max-width: 1250px){
      .coverframe{
         max-width: auto;
         align-items: center;
@@ -113,6 +113,10 @@ line-height: normal;
         width: 45%;
     }
 
+    .imgBox img{
+        width: 100%;
+    }
+
     .coverdata{
         max-width: 280px;
     }
@@ -123,19 +127,41 @@ line-height: normal;
     .covercontent{
         flex-direction: column;
         gap: 1.5rem;
+        margin-left: auto;
+        margin-right: auto;
     }
     .imgBox, .coverText{
         width: 80%;
+    }
+
+    .coverText p {
+        font-size: 16px;
+    }
+
+    .coverText .description span{
+        font-size: 12px;
+    }
+
+    .coverText .coverdata span{
+       font-size: 15px;
     }
   }
 
   @media screen and (max-width: 550px){
     .coverframe{
      width: 90%;
-     
+     margin: 1px 5vw 2rem 5vw;    
     }
 
     .covercontent{
         height: auto;
+    }
+
+    .imgBox, .coverText{
+        width: 90%;
+    }
+
+    img{
+        width: 100%;
     }
   }

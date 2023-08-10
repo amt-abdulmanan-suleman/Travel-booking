@@ -16,6 +16,7 @@ width: 100%;
 flex-shrink: 0;
 display: flex;
 justify-content: center;
+align-items: center;
 flex-direction: row;
 align-items: center;
 gap: 0.5rem;
@@ -40,6 +41,7 @@ font-size: 24px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -1rem;
 }
 
 .experienceText .description{
@@ -60,6 +62,7 @@ line-height: normal;
     display: flex;
     flex-direction: column;
     width: 100px;
+
 }
 
 .experienceText .experiencedata span p{
@@ -69,6 +72,7 @@ font-size: 20px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -1rem;
 }
 
 .experienceText .experiencedata span h6{
@@ -80,7 +84,7 @@ font-weight: 400;
 line-height: normal;
 }
 
-@media screen and (max-width: 1190px){
+@media screen and (max-width: 1250px){
     .experienceframe{
        max-width: auto;
        align-items: center;
@@ -102,11 +106,22 @@ font-size: 12px;
     
  }
 
+ @media screen and (max-width: 1250px){
+    .experiencecontent {
+        height: auto;
+    }
+    img{
+        width: 100%;
+    }
+ }
+
  @media screen and (max-width: 850px){
     .experienceframe{
         width: 100%;
         justify-content: flex-start;
         height: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .experiencecontent{
@@ -116,12 +131,46 @@ font-size: 12px;
         flex-direction: column;
     }
 
-    .experienceText, .imgBox1, .imgBox2{
-        width: 98%;
+    .experienceText{
+        width: 96%;
+        margin: 0px 5vw;
+    }
+
+    .imgBox1, .imgBox2{
+        width: auto;
+        margin: 0px auto;
     }
 
     .experienceText .experiencedata span{
-        max-width: 80px;
+        max-width: 90px;
     }
-   
+
+    .experienceText .experiencedata span p{
+      margin-bottom: -1rem;
+    }
+
+    .experienceframe{
+       
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     .imgBox1 img, .imgBox2 img{
+        width: 575px;
+        height: 424px;
+        flex-shrink: 0;
+        object-fit: cover;
+     }
+
+     .experienceText .heading{
+        margin-bottom: -1rem;
+     }   
+  }
+
+  @media screen and (max-width: 550px){
+    .imgBox1 img, .imgBox2 img{
+        width: 100vw;
+        height: 224px;
+        
+     }
   }

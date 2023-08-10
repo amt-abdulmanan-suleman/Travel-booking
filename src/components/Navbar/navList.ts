@@ -29,7 +29,7 @@ export interface MenuItem {
     
       {
         title: "Log in",
-        url: "",
+        url: "/login",
         cName: "navLinks",
         active: "activeItem",
       },
