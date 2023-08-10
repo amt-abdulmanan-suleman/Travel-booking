@@ -16,6 +16,7 @@ width: 100%;
 flex-shrink: 0;
 display: flex;
 justify-content: center;
+align-items: center;
 flex-direction: row;
 align-items: center;
 gap: 0.5rem;
@@ -80,7 +81,7 @@ font-weight: 400;
 line-height: normal;
 }
 
-@media screen and (max-width: 1190px){
+@media screen and (max-width: 1250px){
     .experienceframe{
        max-width: auto;
        align-items: center;
@@ -118,20 +119,46 @@ font-size: 12px;
         flex-direction: column;
     }
 
-    .experienceText, .imgBox1, .imgBox2{
-        width: 98%;
+    .experienceText{
+        width: 96%;
+        margin: 0px 5vw;
+    }
+
+    .imgBox1, .imgBox2{
+        width: auto;
+        margin: 0px auto;
     }
 
     .experienceText .experiencedata span{
-        max-width: 80px;
+        max-width: 90px;
     }
-   
+
+    .experienceText .experiencedata span p{
+      margin-bottom: -1rem;
+    }
+
+    .experienceframe{
+       
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     .imgBox1 img, .imgBox2 img{
+        width: 375px;
+        height: 224px;
+        flex-shrink: 0;
+        object-fit: cover;
+     }
+
+     .experienceText .heading{
+        margin-bottom: -1rem;
+     }   
   }
 
-  @media screen and (max-width: 850px){
-    .experienceframe{
-       padding-left: 20px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  @media screen and (max-width: 550px){
+    .imgBox1 img, .imgBox2 img{
+        width: 100vw;
+        height: 224px;
+        
+     }
   }

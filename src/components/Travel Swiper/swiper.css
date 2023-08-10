@@ -107,8 +107,6 @@ line-height: normal;
 }
   
 
-  @media screen and (max-width: 3750px){}
-
   @media screen and (max-width: 550px){
     .card-container {
       width: 100%;
@@ -142,8 +140,7 @@ line-height: normal;
       ;
       }
       
-      .travelTextArea p{
-     
+      .travelTextArea p{     
       font-size: 12px;
       ;
       }
@@ -155,6 +152,11 @@ line-height: normal;
   }
 
   @media screen and (max-width: 820px){
+  .travel{
+    padding: 0;
+    margin: 0;
+  }
+
     .card-container {
       width: 100%;
     }
@@ -168,10 +170,22 @@ line-height: normal;
       font-size: 12px;
     }
 
+    .travelCard .cardText p{
+      font-size: 14px;
+    }
+
+    .travelTextArea h1{
+       margin-bottom: -0.7rem;
+    }
+
+    .travelCard .cardText p{
+      margin-bottom: -1.2rem;
+      margin-top: -0.5rem;
+    }
    
   }
 
-  @media screen and (max-width: 1150px){
+  @media screen and (max-width: 1250px){
     .travelContainer{
       width: 100%;
       padding: 1px 5vw;

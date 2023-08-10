@@ -55,6 +55,10 @@ line-height: normal;
     .heroText{
         width: 90%;
   }
+
+  .homeHero{
+    width: auto;
+  }
   }
 
 @media screen and (max-width: 550px){
