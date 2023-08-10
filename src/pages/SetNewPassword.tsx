@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
 import visibility from "../assets/icons/visibility-icon-13.jpg";
 import visibilityOff from "../assets/icons/visibility_off.svg";
-
 import Button from "../components/Buttons/Buttons";
 import "../assets/css/auth.scss";
 import { postRequest } from "../api/request";
@@ -15,6 +14,7 @@ interface PasswordFormData {
 }
 
 const SetNewPassword: React.FC = () => {
+  const { id, token } = useParams();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<PasswordFormData>({
     newPassword: "",
@@ -29,7 +29,7 @@ const SetNewPassword: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     //  password validation and submission
     if (formData.newPassword !== formData.confirmPassword) {
@@ -41,6 +41,10 @@ const SetNewPassword: React.FC = () => {
       );
     } else {
       // API call here
+      const response = await postRequest(`/reset-password/${id}/${token}`, {
+        newPassword: formData.newPassword,
+      });
+
       alert("Password set successfully!");
     }
   };
@@ -61,7 +65,7 @@ const SetNewPassword: React.FC = () => {
         <div className="form__inner">
           <img className="form__logo" src={mainLogo} alt="logo" />
           <h2 className="form__title centered">Set new password</h2>
-          <p className="terms centered">
+          <p className="terms centered new-password">
             Your new password must be different to previously used passwords.
           </p>
           <form onSubmit={handleSubmit}>
@@ -72,10 +76,10 @@ const SetNewPassword: React.FC = () => {
               <div className="form__input__box">
                 <input
                   type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
+                  id="newPassword"
+                  name="newPassword"
                   placeholder="Type password"
-                  value={formData.confirmPassword}
+                  value={formData.newPassword}
                   onChange={handleChange}
                   required
                   className="form__input__box__password"
@@ -106,13 +110,13 @@ const SetNewPassword: React.FC = () => {
             </ul>
             <div className="form__input">
               <label htmlFor="password" className="label">
-                Confirm password{" "}
+                Confirm password
               </label>
               <div className="form__input__box">
                 <input
                   type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   placeholder="Confirm password "
                   value={formData.confirmPassword}
                   onChange={handleChange}
