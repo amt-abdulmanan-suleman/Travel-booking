@@ -18,7 +18,7 @@ const ForgotPassword: React.FC = () => {
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await postRequest("/forget-password", {email});
+    const response = await postRequest("/check-email", {email});
 
     if(response){
       navigate(`/check-email?email=${email}}`)

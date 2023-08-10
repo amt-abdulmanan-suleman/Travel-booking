@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import mainLogo from "../assets/icons/mainLogo.png";
 import signupimage from "../assets/images/login-img.png";
 import visibility from "../assets/icons/visibility-icon-13.jpg";
@@ -51,7 +50,9 @@ const BusinessSignup: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
 
@@ -92,11 +93,11 @@ const BusinessSignup: React.FC = () => {
       <div className="form">
         <div className="form__inner">
           <img className="form__logo" src={mainLogo} alt="logo" />
-          <h2 className="form__title">Business Sign Up</h2>
+          <h2 className="form__title business">Business Sign Up</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form__input">
-              <label htmlFor="fullname" className="label">
-                Business Name *
+            <div className="form__input ">
+              <label htmlFor="fullname " className="label required">
+                Business Name
               </label>
               <input
                 type="text"
@@ -109,8 +110,8 @@ const BusinessSignup: React.FC = () => {
               />
             </div>
             <div className="form__input">
-              <label htmlFor="email" className="label">
-                Business Email *
+              <label htmlFor="email" className="label required">
+                Business Email
               </label>
               <input
                 type="email"
@@ -123,8 +124,8 @@ const BusinessSignup: React.FC = () => {
               />
             </div>
             <div className="form__input">
-              <label htmlFor="businessAddress" className="label">
-                Business Address *
+              <label htmlFor="businessAddress" className="label required">
+                Business Address
               </label>
               <input
                 type="text"
@@ -136,8 +137,8 @@ const BusinessSignup: React.FC = () => {
               />
             </div>
             <div className="form__input">
-              <label htmlFor="businessPhone" className="label">
-                Business Phone Number *
+              <label htmlFor="businessPhone" className="label required">
+                Business Phone Number
               </label>
               <input
                 type="tel"
@@ -149,19 +150,28 @@ const BusinessSignup: React.FC = () => {
                 required
               />
             </div>
-            <div className="form__input">
+            <div className="form__input ">
               <label htmlFor="businessCategory" className="label">
                 Business Category
               </label>
-              <select name="businessCategory" id="businessCategory">
+              <select
+                name="businessCategory"
+                id="businessCategory"
+                className="form__input category"
+                onChange={handleChange}
+                value={formData.businessCategory}
+              >
+                <option value="" disabled selected hidden>
+                  Choose business category
+                </option>
                 <option value="Agriculture">Agriculture</option>
                 <option value="Finance">Finance</option>
                 <option value="Non-Profit">Non-Profit</option>
               </select>
             </div>
             <div className="form__input">
-              <label htmlFor="businessWebsite" className="label">
-                Business Website *
+              <label htmlFor="businessWebsite" className="label required">
+                Business Website
               </label>
               <input
                 type="text"
@@ -178,6 +188,7 @@ const BusinessSignup: React.FC = () => {
                 Business Description (optional)
               </label>
               <textarea
+                className="descriptionTextarea"
                 name="businessDescription"
                 id="businessDescription"
                 placeholder="Type business description"
@@ -186,7 +197,7 @@ const BusinessSignup: React.FC = () => {
               ></textarea>
             </div>
             <div className="form__input">
-              <label htmlFor="password" className="label">
+              <label htmlFor="password" className="label required">
                 Password
               </label>
               <div className="form__input__box">

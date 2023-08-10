@@ -97,8 +97,8 @@ const SetNewPassword: React.FC = () => {
                 )}
               </div>
             </div>
-                  <p>Password must:</p>
             <ul>
+              <p>Password must:</p>
               <li>Use at least 8 characters</li>
               <li>Use upper and lower case characters</li>
               <li>Use 1 or more numbers</li>
@@ -136,7 +136,6 @@ const SetNewPassword: React.FC = () => {
                 )}
               </div>
             </div>
-
             <Button type="submit" block>
               Reset Password
             </Button>

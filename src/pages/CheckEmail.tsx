@@ -13,7 +13,7 @@ const CheckEmail: React.FC = () => {
   const resendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here,
-    const response = await postRequest("/forget-password", {
+    const response = await postRequest("/check-email", {
       email: searchParams.get("email"),
     });
 
