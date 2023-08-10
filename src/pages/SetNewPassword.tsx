@@ -59,9 +59,9 @@ const SetNewPassword: React.FC = () => {
     <div className="wrapper">
       <div className="form">
         <div className="form__inner">
-          <img src={mainLogo} alt="logo" />
-          <h2 className="form__title">Set new password</h2>
-          <p className="terms">
+          <img className="form__logo" src={mainLogo} alt="logo" />
+          <h2 className="form__title centered">Set new password</h2>
+          <p className="terms centered">
             Your new password must be different to previously used passwords.
           </p>
           <form onSubmit={handleSubmit}>
@@ -97,6 +97,13 @@ const SetNewPassword: React.FC = () => {
                 )}
               </div>
             </div>
+                  <p>Password must:</p>
+            <ul>
+              <li>Use at least 8 characters</li>
+              <li>Use upper and lower case characters</li>
+              <li>Use 1 or more numbers</li>
+              <li>Optionally use special characters</li>
+            </ul>
             <div className="form__input">
               <label htmlFor="password" className="label">
                 Confirm password{" "}
