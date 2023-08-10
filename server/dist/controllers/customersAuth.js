@@ -54,7 +54,7 @@ const verifyEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return res.status(400).send({ message: "Invalid link" });
         yield index_js_1.default.query("UPDATE customers SET verified = true WHERE id = $1", [rows[0].id]);
         yield index_js_1.default.query("DELETE FROM verification_tokens WHERE customerId=$1", [rows[0].id]);
-        res.status(200).json({ success: true, message: 'Email verified' });
+        res.redirect('http://localhost:8000/login');
     }
     catch (error) {
         console.log(error);
@@ -114,7 +114,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (!isCorrectPassword) {
                 return res.status(401).json({ success: false, message: "Wrong password" });
             }
-            const { id, name, isAdmin, type, phone, address, website, description } = businessRows[0];
+            const { id, name, isAdmin, category, phone, address, website, description } = businessRows[0];
             // Create access token
             const expiresIn = 12 * 24 * 60 * 60 * 1000; // 12 days in milliseconds
             const accessToken = jsonwebtoken_1.default.sign({ id: id, isAdmin: isAdmin }, config_1.SECRET, { expiresIn: "12d" });
@@ -133,7 +133,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 success: true,
                 accessToken,
                 refreshToken,
-                data: { id, name, type, email, phone, address, website, description },
+                data: { id, name, category, email, phone, address, website, description },
             });
         }
     }
