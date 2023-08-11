@@ -9,26 +9,26 @@ import { postRequest } from "../api/request";
 import { toast } from "react-toastify";
 
 interface FormData {
-  businessName: string;
-  businessEmail: string;
-  businessAddress: string;
-  businessPhone: string;
-  businessCategory: string;
-  businessWebsite: string;
-  businessDescription: string;
+Name: string;
+  Email: string;
+  Address: string;
+  Phone: string;
+  Category: string;
+  Website: string;
+  Description: string;
   password: string;
 }
 
 const BusinessSignup: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    businessName: "",
-    businessEmail: "",
-    businessAddress: "",
-    businessPhone: "",
-    businessCategory: "",
-    businessWebsite: "",
-    businessDescription: "",
+    Name: "",
+    Email: "",
+    Address: "",
+    Phone: "",
+    Category: "",
+    Website: "",
+    Description: "",
     password: "",
   });
 
@@ -104,7 +104,7 @@ const BusinessSignup: React.FC = () => {
                 id="businessName"
                 name="businessName"
                 placeholder="Type business name"
-                value={formData.businessName}
+                value={formData.Name}
                 onChange={handleChange}
                 required
               />
@@ -118,7 +118,7 @@ const BusinessSignup: React.FC = () => {
                 id="businessEmail"
                 name="businessEmail"
                 placeholder="Type business email"
-                value={formData.businessEmail}
+                value={formData.Email}
                 onChange={handleChange}
                 required
               />
@@ -131,7 +131,7 @@ const BusinessSignup: React.FC = () => {
                 type="text"
                 name="businessAddress"
                 placeholder="Type business address"
-                value={formData.businessAddress}
+                value={formData.Address}
                 onChange={handleChange}
                 required
               />
@@ -145,7 +145,7 @@ const BusinessSignup: React.FC = () => {
                 id="businessPhone"
                 name="businessPhone"
                 placeholder="Type business phone number"
-                value={formData.businessPhone}
+                value={formData.Phone}
                 onChange={handleChange}
                 required
               />
@@ -159,7 +159,7 @@ const BusinessSignup: React.FC = () => {
                 id="businessCategory"
                 className="form__input category"
                 onChange={handleChange}
-                value={formData.businessCategory}
+                value={formData.Category}
               >
                 <option value="" disabled selected hidden>
                   Choose business category
@@ -178,7 +178,7 @@ const BusinessSignup: React.FC = () => {
                 id="businessWebsite"
                 name="businessWebsite"
                 placeholder="Type business website"
-                value={formData.businessWebsite}
+                value={formData.Website}
                 onChange={handleChange}
                 required
               />
@@ -192,7 +192,7 @@ const BusinessSignup: React.FC = () => {
                 name="businessDescription"
                 id="businessDescription"
                 placeholder="Type business description"
-                value={formData.businessDescription}
+                value={formData.Description}
                 onChange={handleChange}
               ></textarea>
             </div>
