@@ -14,7 +14,7 @@ import image7 from "../../assets/images/homepage/discover7.png";
 
 const MySwiper: React.FC = () => {
   return (
-    <div className="text-grey swiperContainer">
+    <div className="swiperContainer">
       <Swiper>
         <SwiperSlide>
           <DiscoverCards imageUrl={image1} cardText="Ghana"  />

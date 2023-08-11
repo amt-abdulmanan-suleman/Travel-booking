@@ -11,13 +11,13 @@ export interface MenuItem {
       
       {
         title: "Customer",
-        url: "/customer-signup",
+        url: "/customersignup",
         cName: "navLinks",
         active: "activeItem",
       },
       {
         title: "Business",
-        url: "/business-signup",
+        url: "/businesssignup",
         cName: "navLinks",
         active: "activeItem",
       },

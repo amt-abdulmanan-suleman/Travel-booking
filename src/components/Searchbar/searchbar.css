@@ -43,3 +43,9 @@
       width: 60%;
   }
   }
+
+  @media screen and (max-width: 1250px) {
+    .searchbarInput{
+      width: 80%;
+  }
+  }

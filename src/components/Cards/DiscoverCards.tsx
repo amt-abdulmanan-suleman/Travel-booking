@@ -4,7 +4,7 @@ import React from "react";
 const DiscoverCards: React.FC = () => {
   // Your component logic here
   return (
-    <><div className="swiperContainer">Swiiiiiiiiiii</div></>    
+    <><div className="swiperContainer">Swiiiiiiiiiiipe</div></>    
   );
 };
 

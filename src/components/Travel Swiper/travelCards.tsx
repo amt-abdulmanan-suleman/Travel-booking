@@ -9,7 +9,7 @@ export interface DiscoverCardProps {
 
 const TravelCards: React.FC<DiscoverCardProps> = (props) => {
   return (
-    <div className="card-container">
+    <div className="travelcard-container">
       <div className="travelCard">
       <div className="card-image">
         <img src={props.imageUrl} alt="Card Background" />
