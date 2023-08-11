@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import db from "../db";
 import crypto from 'crypto'
 import { sendEmail } from "../utils/email";
-import { hash } from "bcrypt";
+import { compare, hash } from "bcrypt";
 
 export const resetVerifyEmail = async (req:Request, res:Response) => {
     const {email} = req.body;
@@ -50,6 +50,8 @@ export const changePassword = async (req: Request, res:Response) => {
     try {
         const {rows: customer} = await db.query('select * from customers where id=$1', [id]);
         if(customer[0]){
+            const samePassword = await compare(newPassword, customer[0].password);
+            if(samePassword) return res.status(500).json({success: false, message: "you can't use this password, change another"})
             const hashedPassword = await hash(newPassword,10);
             await db.query('UPDATE customers SET password = $1 WHERE id = $2', [hashedPassword, id]);
             res.status(200).json({
@@ -64,6 +66,8 @@ export const changePassword = async (req: Request, res:Response) => {
                     message: "User doesn't exist",
                 });
             }
+            const samePassword = await compare(newPassword, business[0].password);
+            if(samePassword) return res.status(500).json({success: false, message: "you can't use this password, change another"})
             const hashedPassword = await hash(newPassword,10);
             await db.query('UPDATE businesses SET password = $1 WHERE id = $2', [hashedPassword, id]);
             res.status(200).json({

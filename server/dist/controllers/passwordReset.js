@@ -59,6 +59,9 @@ const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { rows: customer } = yield db_1.default.query('select * from customers where id=$1', [id]);
         if (customer[0]) {
+            const samePassword = yield (0, bcrypt_1.compare)(newPassword, customer[0].password);
+            if (samePassword)
+                return res.status(500).json({ success: false, message: "you can't use this password, change another" });
             const hashedPassword = yield (0, bcrypt_1.hash)(newPassword, 10);
             yield db_1.default.query('UPDATE customers SET password = $1 WHERE id = $2', [hashedPassword, id]);
             res.status(200).json({
@@ -74,6 +77,9 @@ const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
                     message: "User doesn't exist",
                 });
             }
+            const samePassword = yield (0, bcrypt_1.compare)(newPassword, business[0].password);
+            if (samePassword)
+                return res.status(500).json({ success: false, message: "you can't use this password, change another" });
             const hashedPassword = yield (0, bcrypt_1.hash)(newPassword, 10);
             yield db_1.default.query('UPDATE businesses SET password = $1 WHERE id = $2', [hashedPassword, id]);
             res.status(200).json({
