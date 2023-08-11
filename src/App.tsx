@@ -26,7 +26,7 @@ function App(): JSX.Element {
         <Route path="/login" element={<Login />} />
         <Route path="/customer-signup" element={<CustomerSignup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/set-new-password" element={<SetNewPassword />} />
+        <Route path="/reset-password/:id/:token" element={<SetNewPassword />} />
         <Route path="/check-email" element={<CheckEmail />} />
         <Route path="/business-signup" element={<BusinessSignup />} />
         <Route path="/welcome" element={<Welcome />} />

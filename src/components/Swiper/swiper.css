@@ -2,34 +2,36 @@
 display: flex;
 width: 80%;
 padding: 8px 0px;
-flex-direction: column;
 justify-content: center;
 align-items: flex-start;
 gap: 8px;
+overflow: hidden;
 
 }
 
 .swiper {
     width: 100%;
-    height: auto;   
+    height: auto;  
+    overflow: hidden; 
   }
   
   .swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
-    max-width: 19%;
+    max-width: 15.9375rem;
     box-sizing: border-box;
     margin: 0px 40px 0px 0px;
   }
   
-  /* .swiper-slide .swiper-wrapper {
-
-  } */
+  .swiper-slide .swiper-wrapper {
+    max-width: 19%;
+    overflow: hidden;
+  }
 
   .swiper-slide .swiper-wrapper img {
     display: block;
-    max-width: 15.9375rem;
+    width: 15.9375rem;
     height: 100%;
     object-fit: cover;
   }
@@ -65,7 +67,7 @@ gap: 8px;
   }
   
 
-  @media screen and (max-width: 3750px){}
+
 
   @media screen and (max-width: 550px){
     .card-container {
@@ -108,7 +110,7 @@ gap: 8px;
    
   }
 
-  @media screen and (max-width: 1150px){
+  @media screen and (max-width: 1250px){
     .swiperContainer{
       width: 100%;
       padding: 1px 5vw;

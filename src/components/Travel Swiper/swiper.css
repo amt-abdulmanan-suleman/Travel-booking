@@ -23,17 +23,17 @@ gap: 8px;
     margin: 0px 40px 0px 0px;
   }
   
-  /* .swiper-slide .swiper-wrapper {
-
-  } */
-
-  
+ .travelcard-container{
+  box-shadow: none;
+  border-radius: 8px;
+ }  
 
   .swiper-slide .swiper-wrapper img {
     display: block;
     max-width: 15.9375rem;
     height: 100%;
     object-fit: cover;
+    
   }
 
   .travel{
@@ -57,6 +57,7 @@ gap: 8px;
   flex-direction: column;
   gap: 0.5rem;
   margin-top: 0.7rem;
+  margin-bottom: 0.2rem;
 }
 
 .travelCard .cardText{
@@ -70,6 +71,8 @@ font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -1.3rem;
+margin-top: -0.6rem;
 }
 
 .travelCard .cardText h5{
@@ -88,6 +91,7 @@ font-size: 24px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
+margin-bottom: -0.7rem;
 }
 
 .travelTextArea p{
@@ -105,9 +109,11 @@ line-height: normal;
   width: 80%;
   flex-direction: column;
 }
-  
 
-  @media screen and (max-width: 3750px){}
+.card-image img{
+  border-radius: 8px;
+}
+  
 
   @media screen and (max-width: 550px){
     .card-container {
@@ -142,8 +148,7 @@ line-height: normal;
       ;
       }
       
-      .travelTextArea p{
-     
+      .travelTextArea p{     
       font-size: 12px;
       ;
       }
@@ -155,6 +160,11 @@ line-height: normal;
   }
 
   @media screen and (max-width: 820px){
+  .travel{
+    padding: 0;
+    margin: 0;
+  }
+
     .card-container {
       width: 100%;
     }
@@ -168,10 +178,25 @@ line-height: normal;
       font-size: 12px;
     }
 
+    .travelCard .cardText p{
+      font-size: 14px;
+    }
+
+    .travelTextArea h1{
+       margin-bottom: -0.7rem;
+    }
+
+    .travelCard .cardText p{
+      margin-bottom: -1.2rem;
+      margin-top: -0.5rem;
+    }
    
   }
 
-  @media screen and (max-width: 1150px){
+  @media screen and (max-width: 1250px){
+    .travelTextArea {
+      width: 90%;
+    }
     .travelContainer{
       width: 100%;
       padding: 1px 5vw;
@@ -189,5 +214,14 @@ line-height: normal;
     .travelCard .card-image img {
       height: auto;
     }
+
+    .travelTextArea h1{
+      margin-bottom: -0.9rem;
+   }
+
+   .travelCard .cardText p{
+     margin-bottom: -1.25rem;
+     margin-top: -0.55rem;
+   }
     
   }

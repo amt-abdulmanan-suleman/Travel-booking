@@ -95,7 +95,7 @@ const BusinessSignup: React.FC = () => {
           <img className="form__logo" src={mainLogo} alt="logo" />
           <h2 className="form__title business">Business Sign Up</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form__input ">
+            <div className="form__input sm">
               <label htmlFor="fullname " className="label required">
                 Business Name
               </label>
@@ -109,7 +109,7 @@ const BusinessSignup: React.FC = () => {
                 required
               />
             </div>
-            <div className="form__input">
+            <div className="form__input sm">
               <label htmlFor="email" className="label required">
                 Business Email
               </label>
@@ -123,7 +123,7 @@ const BusinessSignup: React.FC = () => {
                 required
               />
             </div>
-            <div className="form__input">
+            <div className="form__input sm">
               <label htmlFor="businessAddress" className="label required">
                 Business Address
               </label>
@@ -136,7 +136,7 @@ const BusinessSignup: React.FC = () => {
                 required
               />
             </div>
-            <div className="form__input">
+            <div className="form__input sm">
               <label htmlFor="businessPhone" className="label required">
                 Business Phone Number
               </label>
@@ -150,7 +150,7 @@ const BusinessSignup: React.FC = () => {
                 required
               />
             </div>
-            <div className="form__input ">
+            <div className="form__input sm">
               <label htmlFor="businessCategory" className="label">
                 Business Category
               </label>
@@ -169,7 +169,7 @@ const BusinessSignup: React.FC = () => {
                 <option value="Non-Profit">Non-Profit</option>
               </select>
             </div>
-            <div className="form__input">
+            <div className="form__input sm">
               <label htmlFor="businessWebsite" className="label required">
                 Business Website
               </label>
@@ -183,7 +183,7 @@ const BusinessSignup: React.FC = () => {
                 required
               />
             </div>
-            <div className="form__input">
+            <div className="form__input sm">
               <label htmlFor="businessDescription" className="label">
                 Business Description (optional)
               </label>
@@ -196,7 +196,7 @@ const BusinessSignup: React.FC = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <div className="form__input">
+            <div className="form__input sm">
               <label htmlFor="password" className="label required">
                 Password
               </label>
