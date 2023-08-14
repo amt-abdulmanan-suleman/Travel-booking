@@ -13,7 +13,7 @@ export const register = async (req:Request, res:Response) => {
     try {
         const hashedPassword = await hash(password, 10);
         const token = crypto.randomBytes(32).toString('hex')
-        const {rows} = await db.query("insert into businesses (name, emial, address, phone, category, website, description, password) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *", 
+        const {rows} = await db.query("insert into businesses (name, email, address, phone, category, website, description, password) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *", 
         [name, email, address, phone, category, website, description, hashedPassword])
         await db.query("insert into verification_tokens_business (businessId, token) values ($1, $2)",[rows[0].id, token]);
 
