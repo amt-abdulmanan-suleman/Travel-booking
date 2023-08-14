@@ -31,7 +31,7 @@ const ForgotPassword: React.FC = () => {
       <div className="form">
         <div className="form__inner">
           <img className="form__logo" src={mainLogo} alt="logo" />
-          <h2 className="form__title reset">Forgot Password</h2>
+          <h2 className="form__title reset">Forgot Password?</h2>
           <p className="terms ">
             No worries, we will send you reset instructions
           </p>
