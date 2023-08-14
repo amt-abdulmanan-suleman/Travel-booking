@@ -9,26 +9,26 @@ import { postRequest } from "../api/request";
 import { toast } from "react-toastify";
 
 interface FormData {
-  businessName: string;
-  businessEmail: string;
-  businessAddress: string;
-  businessPhone: string;
-  businessCategory: string;
-  businessWebsite: string;
-  businessDescription: string;
+  name: string;
+  email: string;
+  address: string;
+  phone: string;
+  category: string;
+  website: string;
+  description: string;
   password: string;
 }
 
 const BusinessSignup: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    businessName: "",
-    businessEmail: "",
-    businessAddress: "",
-    businessPhone: "",
-    businessCategory: "",
-    businessWebsite: "",
-    businessDescription: "",
+    name: "",
+    email: "",
+    address: "",
+    phone: "",
+    category: "",
+    website: "",
+    description: "",
     password: "",
   });
 
@@ -101,10 +101,10 @@ const BusinessSignup: React.FC = () => {
               </label>
               <input
                 type="text"
-                id="businessName"
-                name="businessName"
+                id="name"
+                name="name"
                 placeholder="Type business name"
-                value={formData.businessName}
+                value={formData.name}
                 onChange={handleChange}
                 required
               />
@@ -115,37 +115,37 @@ const BusinessSignup: React.FC = () => {
               </label>
               <input
                 type="email"
-                id="businessEmail"
-                name="businessEmail"
+                id="email"
+                name="email"
                 placeholder="Type business email"
-                value={formData.businessEmail}
+                value={formData.email}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="form__input sm">
-              <label htmlFor="businessAddress" className="label required">
+              <label htmlFor="address" className="label required">
                 Business Address
               </label>
               <input
                 type="text"
-                name="businessAddress"
+                name="address"
                 placeholder="Type business address"
-                value={formData.businessAddress}
+                value={formData.address}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="form__input sm">
-              <label htmlFor="businessPhone" className="label required">
+              <label htmlFor="phone" className="label required">
                 Business Phone Number
               </label>
               <input
                 type="tel"
-                id="businessPhone"
-                name="businessPhone"
+                id="phone"
+                name="phone"
                 placeholder="Type business phone number"
-                value={formData.businessPhone}
+                value={formData.phone}
                 onChange={handleChange}
                 required
               />
@@ -155,11 +155,11 @@ const BusinessSignup: React.FC = () => {
                 Business Category
               </label>
               <select
-                name="businessCategory"
-                id="businessCategory"
+                name="category"
+                id="category"
                 className="form__input category"
                 onChange={handleChange}
-                value={formData.businessCategory}
+                value={formData.category}
               >
                 <option value="" disabled selected hidden>
                   Choose business category
@@ -170,29 +170,29 @@ const BusinessSignup: React.FC = () => {
               </select>
             </div>
             <div className="form__input sm">
-              <label htmlFor="businessWebsite" className="label required">
+              <label htmlFor="website" className="label required">
                 Business Website
               </label>
               <input
                 type="text"
-                id="businessWebsite"
-                name="businessWebsite"
+                id="website"
+                name="website"
                 placeholder="Type business website"
-                value={formData.businessWebsite}
+                value={formData.website}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="form__input sm">
-              <label htmlFor="businessDescription" className="label">
+              <label htmlFor="description" className="label">
                 Business Description (optional)
               </label>
               <textarea
                 className="descriptionTextarea"
-                name="businessDescription"
-                id="businessDescription"
+                name="description"
+                id="description"
                 placeholder="Type business description"
-                value={formData.businessDescription}
+                value={formData.description}
                 onChange={handleChange}
               ></textarea>
             </div>
