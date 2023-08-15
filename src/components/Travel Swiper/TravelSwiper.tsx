@@ -8,6 +8,7 @@ import image2 from "../../assets/images/homepage/accomodate3.png";
 import image3 from "../../assets/images/homepage/accomodate1.png";
 import image4 from "../../assets/images/homepage/accomodate4.png";
 import image5 from "../../assets/images/homepage/accomodate5.png";
+import HeadingWithText from "../TextHeading/TextHeading";
 // import image6 from "../../assets/images/homepage/accomodate6.png";
 // import image7 from "../../assets/images/homepage/accomodate7.png";
 
@@ -16,10 +17,10 @@ const TravelSwiper: React.FC = () => {
   return (
     <>
     <div className="travel">
-    <div className="travelTextArea">
-          <h1>Stay at our top unique properties</h1>
-          <p>From castles and villas to boats and igloos, we have it all</p>
-   </div>
+    <HeadingWithText
+        h1Text="Discover our unique Destinations"
+        pText="From exotic islands to bustling cities, your dream destinations await!"
+      />
     <div className="text-grey travelContainer">
       <Swiper>
         <SwiperSlide>

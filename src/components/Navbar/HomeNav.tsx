@@ -6,8 +6,10 @@ import Dropdown from "../Dropdown/Dropdown";
 import { Link } from "react-router-dom";
 import DropButton from "../Buttons/DropButton";
 import React, { useState } from "react";
+import userIcon from "../../assets/icons/user.svg";
+import notificationImg from "../../assets/icons/notification.svg"
 
-const Navbar: React.FC = () => {
+const HomeNav: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
@@ -52,16 +54,14 @@ const Navbar: React.FC = () => {
       </div>
       <div className="mediaNavbar-sign">
         <div className="registration">
-          <span className="login">
-            <Link to={menuList[3].url} className="login-link">Log in</Link>
-          </span>
-          <DropButton />
+          <img src={notificationImg} alt="" />
+          <img src={userIcon} alt="" />
         </div>
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default HomeNav;
 
 export {}; // Add an empty export to make TypeScript treat this file as a module
