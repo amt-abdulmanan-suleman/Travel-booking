@@ -28,6 +28,9 @@ const FilterBox: React.FC = () => {
          />
          <img src={mapImg} alt="map" />
        </div>
+       <div>
+        {/* filter and products */}
+       </div>
        <div className='swiperArea'>
        <HeadingWithText
         h1Text="More accommodation"
