@@ -14,6 +14,7 @@ import image6 from "../../assets/images/accomodation/swiper6.jpg";
 import image7 from "../../assets/images/accomodation/swiper7.jpg";
 import image8 from "../../assets/images/accomodation/swiper8.jpg";
 import image9 from "../../assets/images/accomodation/swiper9.jpg";
+import ProductsFilter from '../ProductsFilter/ProductsFilter';
 
 
 
@@ -30,6 +31,7 @@ const FilterBox: React.FC = () => {
        </div>
        <div>
         {/* filter and products */}
+        <ProductsFilter />
        </div>
        <div className='swiperArea'>
        <HeadingWithText

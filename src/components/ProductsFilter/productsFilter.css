@@ -1,0 +1,34 @@
+.filterContainer{
+    width: 100%;
+    display: flex;
+    gap: 0.6rem;
+}
+
+.filterContainer .filters{
+    width: 30%;
+    border: 1px solid #3D3939;
+    height: auto;
+}
+
+.filterContainer .filters p{
+    color: var(--primary, #3D3939);
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+border: 2px solid #3D3939;
+display: inline-flex;
+padding: 7px 16px;
+align-items: flex-start;
+gap: 10px;
+width: 100%;
+margin-top: auto;
+}
+
+.filterContainer .products{
+    width: 70%;
+    border: 1px solid black;
+    height: 2178px;
+    overflow-y: scroll;
+}
