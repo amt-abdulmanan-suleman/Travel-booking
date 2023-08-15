@@ -4,7 +4,6 @@ import "./navbar.css";
 import { menuList } from "./navList"; // Import menuList and MenuItem interface
 import Dropdown from "../Dropdown/Dropdown";
 import { Link } from "react-router-dom";
-import DropButton from "../Buttons/DropButton";
 import React, { useState } from "react";
 import userIcon from "../../assets/icons/user.svg";
 import notificationImg from "../../assets/icons/notification.svg"
