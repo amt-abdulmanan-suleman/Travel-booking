@@ -17,7 +17,7 @@ const db_1 = __importDefault(require("../db"));
 const addToCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { product_id, product_type, user_id } = req.body;
     try {
-        const validProductTypes = ['hotel', 'accommodations', 'flight'];
+        const validProductTypes = ['hotels', 'accommodations', 'flights'];
         if (!validProductTypes.includes(product_type)) {
             return res.status(400).json({ error: 'Invalid product_type' });
         }
@@ -55,16 +55,12 @@ exports.removeFromCart = removeFromCart;
 const getCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id } = req.params;
     try {
-        const query = `
-      SELECT c.id AS cart_item_id,
-            p.*
-      FROM cart AS c
-      JOIN ${sanitizeTableName(req.body.product_type)} AS p
-      ON c.product_id = p.id
-      WHERE c.user_id = $1
-    `;
-        const { rows } = yield db_1.default.query(query, [user_id]);
-        res.status(200).json({ data: rows });
+        const { rows: carts } = yield db_1.default.query('select product_id, product_type from cart where user_id=$1', [user_id]);
+        const info = yield Promise.all(carts.map((cart) => __awaiter(void 0, void 0, void 0, function* () {
+            const { rows: productData } = yield db_1.default.query(`SELECT * FROM ${cart.product_type} WHERE id = $1`, [cart.product_id]);
+            return productData[0];
+        })));
+        res.status(200).json({ data: info });
     }
     catch (error) {
         console.error('Error fetching cart items:', error);

@@ -13,6 +13,8 @@ const passwordResetRoutes_1 = __importDefault(require("./routes/passwordResetRou
 const accomodation_1 = __importDefault(require("./routes/accomodation"));
 const cart_1 = __importDefault(require("./routes/cart"));
 const purchase_1 = __importDefault(require("./routes/purchase"));
+const flight_1 = __importDefault(require("./routes/flight"));
+const hotel_1 = __importDefault(require("./routes/hotel"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
@@ -34,6 +36,8 @@ app.use("/", passwordResetRoutes_1.default);
 app.use("/api/accomodations", accomodation_1.default);
 app.use('/cart', cart_1.default);
 app.use('/purchase', purchase_1.default);
+app.use('/api/flights', flight_1.default);
+app.use('/api/hotels', hotel_1.default);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
