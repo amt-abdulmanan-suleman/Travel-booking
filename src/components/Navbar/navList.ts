@@ -35,13 +35,13 @@ export interface MenuItem {
       },
       {
         title: "Customer",
-        url: "/customer",
+        url: "/customer-signup",
         cName: "navLinks",
         active: "activeItem",
       },
       {
         title: "Business",
-        url: "/business",
+        url: "/business-signup",
         cName: "navLinks",
         active: "activeItem",
       },

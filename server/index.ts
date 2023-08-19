@@ -8,7 +8,8 @@ import resetPasswordRouter from './routes/passwordResetRoutes'
 import accomodationRouter from './routes/accomodation'
 import cartRouter from './routes/cart';
 import purchaseRouter from './routes/purchase'
-
+import flightRouter from './routes/flight'
+import hotelRouter from './routes/hotel'
 
 dotenv.config()
 const app = express();
@@ -33,7 +34,9 @@ app.use("/business-auth", businessRouter)
 app.use("/",resetPasswordRouter)
 app.use("/api/accomodations", accomodationRouter)
 app.use('/cart', cartRouter)
-app.use('/purchase', purchaseRouter)
+app.use('/purchase', purchaseRouter);
+app.use('/api/flights', flightRouter)
+app.use('/api/hotels', hotelRouter)
 
 app.listen(port,()=>{
     console.log(`Server running on port ${port}`)

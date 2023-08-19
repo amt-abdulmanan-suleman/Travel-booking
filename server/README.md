@@ -131,7 +131,7 @@ Request body
 
 ```json
 {
-  email: "user_email"
+  "email": "user_email"
 }
 ```
 
@@ -139,8 +139,8 @@ Response body
 
 ```json
 {
-  success: true,
-  message: "reset password link sent"
+  "success": true,
+  "message": "reset password link sent"
 }
 ```
 
@@ -150,7 +150,7 @@ Request body
 
 ```json
 {
-  newPassword: "new_password"
+  "newPassword": "new_password"
 }
 ```
 
@@ -158,8 +158,8 @@ Response body
 
 ```json
 {
-  success: true,
-  message: "password reset successful"
+  "success": true,
+  "message": "password reset successful"
 }
 ```
 ## Accommodations Routes
@@ -258,6 +258,196 @@ Response body:
 }
 ```
 
+
+## Hotel Routes
+
+### NB: You've to be registered/ register as a business to be authorized to access the create, delete and update routes.
+### `POST /api/hotels`
+
+create a new hotel
+
+Request body:
+
+```json
+{
+    "hotel_name": "Example Hotel",
+    "location_city": "Cityville",
+    "room_type": "Double",
+    "price_per_night": 150.00,
+    "available_rooms": 10,
+    "total_rooms": 20
+}
+
+```
+Response body:
+
+```json
+{
+  "success": true,
+  "message": "hotels added successfully",
+  "data": "hotels info"
+}
+```
+
+### `GET /api/hotels`
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "array of hotels"
+}
+```
+
+### `GET /api/hotels/:id`
+
+fetch an accommodation
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "hotels info"
+}
+```
+### `GET /api/hotels/:user_id/mine`
+
+fetch an array of the business' posted hotels only
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "hotels info"
+}
+```
+
+### `PATCH /api/hotels/:id`
+
+Request body:
+```json
+{
+  "name": "new_name"
+}
+```
+
+Response body:
+```json
+{
+  "success" : true,
+  "message" : "hotel updated successfully",
+  "data": "new updated info"
+}
+```
+
+
+### `DELETE /api/hotels/:id`
+
+Response body:
+```json
+{
+  "success" : true,
+  "message" : "hotel deleted successfully",
+}
+```
+
+## Flight Routes
+
+### NB: You've to be registered/ register as a business to be authorized to access the create, delete and update routes.
+### `POST /api/flights`
+
+create a new flight
+
+Request body:
+
+```json
+{
+    "airline_name": "Example Airlines",
+    "flight_number": "EA123",
+    "departure_city": "City A",
+    "arrival_city": "City B",
+    "departure_datetime": "2023-09-01T08:00:00",
+    "arrival_datetime": "2023-09-01T10:30:00",
+    "price": 250.00,
+    "available_seats": 120,
+    "total_seats": 150
+}
+
+
+```
+Response body:
+
+```json
+{
+  "success": true,
+  "message": "flight added successfully",
+  "data": "flights info"
+}
+```
+
+### `GET /api/flights`
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "array of flights"
+}
+```
+
+### `GET /api/flights/:id`
+
+fetch a flight
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "flight info"
+}
+```
+### `GET /api/flight/:user_id/mine`
+
+fetch an array of the business' posted flight only
+
+Response body:
+```json
+{
+  "success" : true,
+  "data" : "flights info"
+}
+```
+
+### `PATCH /api/flights/:id`
+
+Request body:
+```json
+{
+  "name": "new_name"
+}
+```
+
+Response body:
+```json
+{
+  "success" : true,
+  "message" : "flight updated successfully",
+  "data": "new updated info"
+}
+```
+
+
+### `DELETE /api/flights/:id`
+
+Response body:
+```json
+{
+  "success" : true,
+  "message" : "flight deleted successfully",
+}
+```
+
+
 ## CART Routes
 ### `POST /carts`
 
@@ -319,9 +509,9 @@ Request body
 Response body
 ```json
 {
-  success: true,
-  message: "Transaction completed",
-  charge: "amount paid"
+  "success": true,
+  "message": "Transaction completed",
+  "charge": "amount paid"
 }
 ```
 

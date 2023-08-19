@@ -11,16 +11,17 @@ export interface MenuItem {
       
       {
         title: "Customer",
-        url: "/customersignup",
+        url: "/customer-signup",
         cName: "navLinks",
         active: "activeItem",
       },
       {
         title: "Business",
-        url: "/businesssignup",
+        url: "/business-signup",
         cName: "navLinks",
         active: "activeItem",
       },
     //   
   ];
   
+
