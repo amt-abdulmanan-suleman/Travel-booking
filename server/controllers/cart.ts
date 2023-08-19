@@ -7,7 +7,7 @@ import db from "../db";
 export const addToCart = async (req:Request, res:Response) => {
     const { product_id, product_type, user_id } = req.body;
   try {
-    const validProductTypes = ['hotel', 'accommodations', 'flight'];
+    const validProductTypes = ['hotels', 'accommodations', 'flights'];
     if (!validProductTypes.includes(product_type)) {
       return res.status(400).json({ error: 'Invalid product_type' });
     }
@@ -47,20 +47,14 @@ export const removeFromCart = async (req:Request, res:Response) => {
 
 
 export const getCart = async (req: Request, res: Response) => {
-  const { user_id } = req.params;
-
+  const {user_id} = req.params
   try {
-    const query = `
-      SELECT c.id AS cart_item_id,
-            p.*
-      FROM cart AS c
-      JOIN ${sanitizeTableName(req.body.product_type)} AS p
-      ON c.product_id = p.id
-      WHERE c.user_id = $1
-    `;
-
-    const {rows} = await db.query(query, [user_id]);
-    res.status(200).json({data:rows});
+    const{rows: carts} = await db.query('select product_id, product_type from cart where user_id=$1',[user_id])
+    const info = await Promise.all(carts.map(async (cart) => {
+      const { rows: productData } = await db.query(`SELECT * FROM ${cart.product_type} WHERE id = $1`, [cart.product_id]);
+      return productData[0]; 
+  }));
+    res.status(200).json({data:info});
   } catch (error) {
     console.error('Error fetching cart items:', error);
     res.status(500).json({ error: 'An error occurred while fetching cart items' });
